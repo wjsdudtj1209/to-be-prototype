@@ -1425,7 +1425,7 @@ SHEETS.history = () => {
       <div class="bmode nw" data-req="22 · F-02·03"><span class="cap" style="margin:0">시세 기준</span><div class="seg sm">${[["d","기간"],["n","건수"]].map(([k,l])=>`<button class="${(S.basis[0]==="n")===(k==="n")?"on":""}" data-a="bMode" data-k="${k}">${l}</button>`).join("")}</div></div>
       <div class="seg">${(S.basis[0]==="n" ? [["n10","10건"],["n30","30건"],["n50","50건"],["n100","100건"]] : [["m1","1개월"],["m3","3개월"],["m6","6개월"],["y1","1년"],["all","전체"]]).map(([k,l])=>`<button class="${S.basis===k?"on":""}" data-a="basis" data-k="${k}">${l}</button>`).join("")}</div>
       ${ex95Html()}
-      ${chart2(h.opt, S.basis)}${histBars(h.opt, S.basis)}
+      ${chart2(h.opt, S.basis)}
       <div class="seg">${[["sales","체결 거래"],["asks","판매 입찰"],["bids","구매 입찰"]].map(([k,l])=>`<button class="${h.tab===k?"on":""}" data-a="hTab" data-k="${k}">${l}</button>`).join("")}</div>
       <div class="tb">${thead(h.tab, so, true)}${tableRows(list, h.tab, h.limit)}</div>
       ${list.length>h.limit?`<button class="more" data-a="hMore">더보기</button>`:""}
