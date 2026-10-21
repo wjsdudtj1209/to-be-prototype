@@ -558,6 +558,12 @@ body.mark .nw[data-req]::after{content:attr(data-req);position:absolute;right:2p
 .pen{font-size:14px}
 .pen td{padding:11px 0;color:#333;line-height:1.45;word-break:keep-all}
 .pen td.pa{color:var(--red);font-weight:600}
+.panel .opt{margin:6px 0 6px 30px;width:calc(100% - 30px);text-align:left}
+.panel .opt .pr{font-weight:400;color:var(--text)}
+.panel .opt.on .ot{font-weight:700}
+.panel .opt.on .pr{font-weight:700;color:var(--red)}
+.panel .opt small{display:block;font-size:11.5px;color:var(--sub);font-weight:400;margin-top:2px}
+.panel .rt.on .nm{font-weight:700}
 .gcap{font-size:11.5px;color:var(--sub);padding:12px 16px 0;line-height:1.4}
 .sz .kr{font-size:10.5px;color:var(--sub);line-height:1.1;font-weight:500}
 .szc-h .szb{font-size:14.5px;padding:10px 14px}
@@ -1287,7 +1293,7 @@ SCREENS.product = () => {
   const P = DATA.product, pct = P.retail ? Math.round((P.retail-repPrice)/P.retail*100) : 0;
   const t1 = tomorrow();
   // 22 · F-04 + 19 제안: 버튼 가격은 시세에서 고른 사이즈, 없으면 내 사이즈 기준
-  const bs = S.prodOpt !== "all" ? +S.prodOpt : DATA.mySize, bz = sizeOf(bs), bBuy = bz ? minNN(bz.fast, bz.normal) : null, bSell = bz ? bz.bid : null, repS = sizeAt("buy", repPrice);
+  const bs = S.prodOpt !== "all" ? +S.prodOpt : null, bz = sizeOf(bs), bBuy = bz ? minNN(bz.fast, bz.normal) : null, bSell = bz ? bz.bid : null, repS = sizeAt("buy", repPrice);
   const {list, so} = listFor(S.prodOpt, S.prodTab, null);
   const rows = list.slice(0,5).map(x=>({...x,_ago:true}));
   const optName = S.prodOpt==="all" ? "모든 옵션" : S.prodOpt;
@@ -1586,15 +1592,27 @@ SHEETS.buySheet = () => {
     return `<button class="sz ${b.size===x.s?"on":""}" data-a="buySize" data-s="${x.s}">${x.s===DATA.mySize?'<span class="mysz nw" data-req="19 · 제안">MY</span>':""}<b>${x.fast?bolt:""}${SL(x.s)}</b>${KRl(x.s)}${p?`<span class="p red">${gt}${won(p)}</span>`:`<span class="p none">구매입찰</span>`}</button>`; }).join("");
   let panel = "";
   if (z && !b.pc){
-    const r = b.route, rows = [];
-    if (z.fast) rows.push(`<button class="rt ${r==="fast"?"on":""}" data-a="buyRoute" data-r="fast"><span class="radio ${r==="fast"?"on":""}"></span><span class="nm">빠른배송 ${bolt}</span><span class="ds">내일 도착</span>${r==="fast"?"":`<span class="rtw"><span class="pr">${won(z.fast)}원</span><span class="tot2 nw" data-req="08 · F-06">총 ${won(totOf(z.fast,"fast"))}원</span></span>`}</button>
-      ${r==="fast"?`<button class="opt on" data-a="buyRoute" data-r="fast"><span>내일 ${md(t1)} 도착 예정</span><span class="rtw"><span class="pr">${won(z.fast)}원</span><span class="tot2 nw" data-req="08 · F-06">총 ${won(totOf(z.fast,"fast"))}원</span></span></button>`:""}
-      ${z.p95?`<button class="opt opt95" data-a="open95" data-s="${z.s}"><span>내일 ${md(t1)} 도착 예정</span><span class="rtw"><span><span class="badge95">95점</span> <span class="pr" style="font-weight:500">${won(z.p95)}원~</span></span></span><span class="d95 nw" data-req="04 · F-04"><b>95점</b>은 미착용이지만 검수에서 하자가 확인된 상품이에요. 가격은 판매자가 정해서 비싸다고 상태가 더 좋은 건 아니에요. <u>하자 사진 보기</u> ›</span></button>`:""}`);
-    rows.push(`<button class="rt ${r==="normal"?"on":""}" data-a="buyRoute" data-r="normal"><span class="radio ${r==="normal"?"on":""}"></span><span class="nm">일반배송</span><span class="ds">5-7영업일</span><span class="rtw"><span class="pr">${z.normal?won(z.normal)+"원":"구매입찰"}</span>${z.normal?`<span class="tot2 nw" data-req="08 · F-06">총 ${won(totOf(z.normal,"normal"))}원</span>`:""}</span></button>`);
-    if (z.overseas) rows.push(`<button class="rt ${r==="overseas"?"on":""}" data-a="buyRoute" data-r="overseas"><span class="radio ${r==="overseas"?"on":""}"></span><span class="nm">해외배송</span><span class="ds">6-10영업일</span><span class="rtw"><span class="pr">${won(z.overseas)}원</span><span class="tot2 nw" data-req="08 · F-06·07">예상 총 ${won(totOf(z.overseas,"overseas") + dutyEst(z.overseas).tax)}원</span><span class="tax nw" data-req="08 · F-07">관부가세 예상 ${won(dutyEst(z.overseas).tax)}원 포함</span></span></button>`);
-    const main = r==="normal" ? (z.normal?"즉시 구매 / 구매 입찰":"구매 입찰") : "즉시 구매하기";
-    panel = `<div class="panel"><div class="handle" data-a="panelDown" style="margin-bottom:4px;cursor:pointer" title="사이즈 다시 고르기"></div>${rows.join("")}${brkHtml(z, r)}
-      <div class="btns">${r==="overseas"?"":`<button class="btn dark" data-a="toast" data-m="장바구니에 담겼습니다.">장바구니 담기</button>`}<button class="btn red" data-a="buyGo">${main}</button></div></div>`;
+    const r = b.route, sub = r === "fast" && !z.fast ? "95" : (b.sub || "new"), rows = [];
+    const row = (k, nm, ds, pr, tt) => r === k
+      ? `<button class="rt on" data-a="buyRoute" data-r="${k}"><span class="radio on"></span><span class="nm">${nm}</span></button>`
+      : `<button class="rt" data-a="buyRoute" data-r="${k}"><span class="radio"></span><span class="nm">${nm}</span><span class="ds">${ds}</span><span class="rtw"><span class="pr">${pr}</span>${tt}</span></button>`;
+    const tot = (p, k, tl = "") => p ? `<span class="tot2 nw" data-req="08 · F-06">총 ${won(totOf(p, k))}원${tl}</span>` : "";
+    if (z.fast || z.p95){
+      const lo = minNN(z.fast, z.p95), tl = z.p95 ? "~" : "";
+      rows.push(row("fast", `빠른배송 ${bolt}`, `내일 ${md(t1)} 도착 예정`, `${won(lo)}원${tl}`, tot(lo, "fast", tl)));
+      if (r === "fast") rows.push(`${z.fast ? `<button class="opt ${sub === "new" ? "on" : ""}" data-a="buySub" data-v="new"><span class="ot">내일 ${md(t1)} 도착 예정</span><span class="pr">${won(z.fast)}원</span></button>` : ""}${z.p95 ? `<button class="opt opt95 ${sub === "95" ? "on" : ""}" data-a="buySub" data-v="95"><span class="ot">내일 ${md(t1)} 도착 예정</span><span><span class="badge95">95점</span> <span class="pr">${won(z.p95)}원~</span></span><span class="d95 nw" data-req="04 · F-04"><b>95점</b>은 미착용이지만 검수에서 하자가 확인된 상품이에요. 가격은 판매자가 정해서 비싸다고 상태가 더 좋은 건 아니에요. <u data-a="open95" data-s="${z.s}">하자 사진 보기</u> ›</span></button>` : ""}`);
+    }
+    rows.push(row("normal", "일반배송", "5-7영업일", z.normal ? won(z.normal) + "원" : "구매입찰", tot(z.normal, "normal")));
+    if (r === "normal") rows.push(`<button class="opt on" data-a="buyRoute" data-r="normal"><span class="ot">5-7영업일 내 도착 예정</span><span class="pr">${z.normal ? won(z.normal) + "원" : "구매입찰"}</span></button>`);
+    if (z.overseas){
+      rows.push(row("overseas", "해외배송", "6-10영업일 · 관부가세 별도", won(z.overseas) + "원", `<span class="tot2 nw" data-req="08 · F-06·07">예상 총 ${won(totOf(z.overseas, "overseas") + dutyEst(z.overseas).tax)}원</span>`));
+      if (r === "overseas") rows.push(`<button class="opt on" data-a="buyRoute" data-r="overseas"><span class="ot">6-10영업일 내 도착 예정<small>사업자 상품</small></span><span class="rtw"><span class="pr">${won(z.overseas)}원</span><small>관부가세 별도</small></span></button>`);
+    }
+    const is95 = r === "fast" && sub === "95", main = r === "normal" ? (z.normal ? "즉시 구매 / 구매 입찰" : "구매 입찰") : "즉시 구매하기";
+    const btns = is95 ? `<button class="btn dark" data-a="open95" data-s="${z.s}">구매 가능 상품 보기</button>`
+      : `${r === "overseas" ? "" : `<button class="btn dark" data-a="toast" data-m="장바구니에 담겼습니다.">장바구니 담기</button>`}<button class="btn red" data-a="buyGo">${main}</button>`;
+    panel = `<div class="panel"><div class="handle" data-a="panelDown" style="margin-bottom:4px;cursor:pointer" title="사이즈 다시 고르기"></div>${rows.join("")}${is95 ? "" : brkHtml(z, r)}
+      <div class="btns">${btns}</div></div>`;
   }
   return `<div class="sheet" style="height:92%">
     <div class="handle"></div>
@@ -1724,8 +1742,9 @@ A.histSell = () => { S.sheets = []; A.openSell({s: S.hist.opt==="all"?"":S.hist.
 A.openBuy = (d={}) => { S.buy = {size:null, route:null}; if (d.s) setBuySize(+d.s); openSheet("buySheet"); };
 function setBuySize(s){ const z = sizeOf(s); S.buy.size = s; S.buy.route = (z.normal != null && (z.fast == null || z.normal <= z.fast)) ? "normal" : z.fast ? "fast" : z.overseas ? "overseas" : "normal"; S.prodOpt = String(s); S.hist.opt = String(s); }  // 22 · F-01 고른 사이즈를 시세가 이어받음
 A.panelDown = () => { const top = S.sheets[S.sheets.length - 1]; if (top && top.name === "sellSheet") S.sell.pc = true; else S.buy.pc = true; log("배송 패널을 내려 사이즈 선택으로"); render(); };
-A.buySize = d => { S.buy.pc = false; setBuySize(+d.s); log(`구매 사이즈 선택: ${d.s}`); render(); };
-A.buyRoute = d => { S.buy.route = d.r; log(`구매 경로 선택: ${{fast:"빠른배송",normal:"일반배송",overseas:"해외배송"}[d.r]}`); render(); };
+A.buySize = d => { S.buy.pc = false; S.buy.sub = null; setBuySize(+d.s); log(`구매 사이즈 선택: ${d.s}`); render(); };
+A.buySub = d => { S.buy.sub = d.v; log(`빠른배송 ${d.v === "95" ? "95점" : "새 상품"} 선택`); render(); };
+A.buyRoute = d => { if (d.r !== S.buy.route) S.buy.sub = null; S.buy.route = d.r; log(`구매 경로 선택: ${{fast:"빠른배송",normal:"일반배송",overseas:"해외배송"}[d.r]}`); render(); };
 A.buyGo = () => {
   const {size, route} = S.buy, z = sizeOf(size);
   log(`구매 진행: ${size} ${route}`);
