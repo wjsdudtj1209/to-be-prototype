@@ -318,8 +318,14 @@ body.mark .nw{outline:2px dashed #6155f5;outline-offset:2px;position:relative}
 body.mark .nw[data-req]::after{content:attr(data-req);position:absolute;right:2px;top:-10px;background:#6155f5;color:#fff;font-size:9px;font-weight:700;padding:1px 4px;border-radius:4px;z-index:3;white-space:nowrap;line-height:1.4}
 .cap{font-size:12px;color:var(--sub);margin-top:3px;line-height:1.45}
 .mk-top .cap{margin:0}
-.mix{background:#fff7e6;border:1px solid #f1dcae;border-radius:10px;padding:10px 12px;font-size:12.5px;line-height:1.5;margin-bottom:12px}
-.mix button{margin-top:7px;border:1px solid #d9c38f;border-radius:14px;padding:4px 11px;font-size:12px;font-weight:600;background:#fff}
+.mix{font-size:12px;color:var(--sub);line-height:1.5;margin-bottom:12px}
+.mix button{margin-top:2px;padding:0;font-size:12px;font-weight:600;color:var(--text);text-decoration:underline}
+.iib{display:inline-flex;vertical-align:-3px;margin-left:3px;padding:0}
+.iib svg{width:14px;height:14px}
+.p3{position:relative}
+.p3m{display:flex;justify-content:flex-end;margin-top:7px}
+.p3l{display:inline-flex;align-items:center;gap:3px;font-size:12px;color:var(--sub)}
+.p3l svg{width:14px;height:14px}
 .szc{margin:0 16px 14px;padding:14px;border:1px solid var(--line);border-radius:14px}
 .szc-h{display:flex;align-items:center;gap:10px;margin-bottom:12px;min-width:0}
 .szc-h .sub{font-size:12px;line-height:1.35}
@@ -355,9 +361,9 @@ body.mark .nw[data-req]::after{content:attr(data-req);position:absolute;right:2p
 .hist div{flex:1;background:#f3c9c4;border-radius:3px 3px 0 0;position:relative}
 .hist div span{position:absolute;top:-15px;left:0;right:0;text-align:center;font-size:10px;color:var(--sub)}
 .histl{display:flex;justify-content:space-between;font-size:10px;color:var(--sub);margin-bottom:14px}
-.def95{font-size:12.5px;line-height:1.55;color:var(--sub2);background:var(--gray2);border-radius:10px;padding:10px 12px;margin-bottom:12px}
+.def95{word-break:keep-all;font-size:12.5px;line-height:1.55;color:var(--sub2);background:var(--gray2);border-radius:10px;padding:10px 12px;margin-bottom:12px}
 .c95 .st{font-size:11.5px;color:var(--sub2);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.c95 .df{font-size:11.5px;color:var(--red);margin-top:1px}
+.c95 .df{font-size:11.5px;color:var(--sub);margin-top:1px}
 .c95 .df.lo{color:var(--green)}
 .szinfo{margin:12px 16px 0;padding:11px 13px;background:var(--gray2);border:1px solid var(--line2);border-radius:12px;font-size:12.5px;line-height:1.55}
 .szinfo .r1{display:flex;align-items:baseline;gap:8px;margin-bottom:3px}
@@ -504,6 +510,54 @@ body.mark .nw[data-req]::after{content:attr(data-req);position:absolute;right:2p
 .my-card .em{text-align:center;font-size:13.5px;margin:20px 0 14px}
 .my-btn{display:block;width:100%;text-align:center;border:1px solid var(--line);border-radius:10px;padding:11px 0;font-size:13.5px}
 .pl-my{font-size:11px;font-weight:500;color:var(--sub);margin-left:5px}
+.opt.opt95{flex-wrap:wrap;row-gap:8px}
+.opt95 .d95{flex-basis:100%;font-size:12px;color:var(--sub2);line-height:1.5;text-align:left}
+.opt95 .d95 b{color:var(--text)}
+.dmr{padding:4px 16px}
+.dmo{display:flex;align-items:flex-start;gap:12px;width:100%;text-align:left;padding:12px 0}
+.dmo .radio{margin-top:1px;flex:none}
+.dmo .tx{display:flex;flex-direction:column;gap:3px;min-width:0}
+.dmo .n{font-size:15px;font-weight:600;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.dmo .g{font-size:13.5px;color:var(--text)}
+.dmo .d{font-size:13px;color:var(--sub)}
+.dmo .lk{font-size:13px;color:var(--sub2);text-decoration:underline;margin-top:2px}
+.pill-w{font-size:12px;font-weight:600;color:var(--red);background:#fdeeee;border-radius:6px;padding:2px 8px}
+.dmc{display:flex;align-items:center;justify-content:space-between;width:100%;border-top:1px solid var(--line);padding:14px 0 12px;font-size:13.5px;color:var(--sub2)}
+.dmc span{text-decoration:underline}
+.dmc svg{width:16px;height:16px}
+.cxl{background:var(--gray2);border-radius:10px;padding:12px 14px;margin-bottom:14px;font-size:13.5px;line-height:1.5}
+.cxl .h{font-weight:700;margin-bottom:4px}
+.prow2{display:flex;gap:14px;padding:6px 16px 20px}
+.prow2 .im{width:96px;height:96px;border-radius:12px;background:#f4f4f4;flex:none;display:flex;align-items:center;justify-content:center}
+.prow2 .im img.pho{width:84px}
+.prow2 .ko{font-size:15px;margin-top:4px}
+.prow2 .en,.prow2 .md{font-size:13px;color:var(--sub);margin-top:2px}
+.prow2 .szl{font-size:16px;font-weight:700;margin-top:12px}
+.band{height:10px;background:#f4f4f6;margin:0 -16px}
+.prow2+.band{margin:0}
+.plist2{border:0;margin:10px 0 14px}
+.plist2 li{padding:6px 0}
+.pnow2{border-bottom:1px solid var(--line)}
+.pnow2.warn{border-color:var(--red)}
+.cfoot2{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:0}
+.cfoot2 .tot{display:flex;flex-direction:column;align-items:flex-start;gap:2px;margin:0}
+.cfoot2 .tot .t{font-size:13px;font-weight:500}
+.cfoot2 .tot .v{font-size:20px;font-weight:800}
+.cfoot2 .btn{width:auto;flex:none;padding:0 28px;height:52px;border-radius:12px}
+.dl2 .dlrow{display:flex;align-items:center;justify-content:space-between;width:100%;margin-top:10px;font-size:16px;text-align:left}
+.dl2 .dd{width:30px;height:30px;border:1px solid var(--line);border-radius:15px;display:flex;align-items:center;justify-content:center;flex:none}
+.dl2 .dd svg{width:12px;height:12px}
+.qb{display:inline-flex;vertical-align:-4px}
+#toast.top{top:calc(var(--sat, 0px) + 20px);bottom:auto;left:20px;right:20px}
+#toast.top div{position:relative;width:100%;min-height:48px;display:flex;align-items:center;justify-content:center;padding:12px 18px 12px 52px;border-radius:24px;background:rgba(51,51,51,.9);font-size:15px;animation:tdn .22s ease-out}
+#toast.top .tk{position:absolute;left:14px;top:50%;margin-top:-12px;display:flex;color:var(--green)}
+@keyframes tdn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+.sbtns .btn{height:56px;gap:2px}
+.sbtns .l1{display:flex;align-items:center;gap:6px;font-size:16px;font-weight:700}
+.sbtns .l2{font-size:12px;font-weight:400;opacity:.9}
+.pen{font-size:14px}
+.pen td{padding:11px 0;color:#333;line-height:1.45;word-break:keep-all}
+.pen td.pa{color:var(--red);font-weight:600}
 .gcap{font-size:11.5px;color:var(--sub);padding:12px 16px 0;line-height:1.4}
 .sz .kr{font-size:10.5px;color:var(--sub);line-height:1.1;font-weight:500}
 .szc-h .szb{font-size:14.5px;padding:10px 14px}
@@ -888,10 +942,10 @@ function closeSheet(fromY){
   sh.animate(k, {duration: center ? 160 : 240, easing: "cubic-bezier(.4,0,.2,1)", fill: "forwards"}).onfinish = done;
   if (dim) dim.animate([{opacity: getComputedStyle(dim).opacity}, {opacity: 0}], {duration: 240, fill: "forwards"});
 }
-function toast(msg){ $("#toast").innerHTML = `<div>${esc(msg)}</div>`; clearTimeout(toast.t); toast.t = setTimeout(()=>$("#toast").innerHTML="", 1800); }
-const LABEL = { list:"상품 목록", my:"MY", product:"상품 상세", buyConfirm:"구매 확인(즉시 구매/구매 입찰)", checkout:"배송/결제", p95:"95점 상품 상세",
+function toast(msg, top){ $("#toast").className = top ? "top" : ""; $("#toast").innerHTML = top ? `<div><span class="tk"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l4.8 4.8L19.5 7"/></svg></span>${esc(msg)}</div>` : `<div>${esc(msg)}</div>`; clearTimeout(toast.t); toast.t = setTimeout(()=>$("#toast").innerHTML="", 1800); }
+const LABEL = { list:"상품 목록", my:"MY", expPick:"입찰 마감기한", product:"상품 상세", buyConfirm:"구매 확인(즉시 구매/구매 입찰)", checkout:"배송/결제", p95:"95점 상품 상세",
   sellCheck:"판매 전 확인", sellConfirm:"판매 확인(즉시 판매/판매 입찰)", sellOrder:"주문/정산",
-  buySheet:"구매하기 시트", sellSheet:"판매하기 시트", history:"거래 및 입찰 내역", optPicker:"사이즈 선택", info:"안내", done:"완료 안내", memo:"배송 요청사항" };
+  buySheet:"구매하기 시트", sellSheet:"판매하기 시트", history:"거래 및 입찰 내역", optPicker:"옵션 선택", info:"안내", done:"완료 안내", memo:"배송 요청사항" };
 
 /* ------------------------------ shared pieces ------------------------------ */
 const prow = (opts={}) => `<div class="prow"><div class="im">${shoe()}</div><div style="min-width:0">
@@ -925,7 +979,7 @@ function thead(tab, so, sortable){
 /* ============================== TO-BE helpers ============================== */
 const CONV = [[225,3.5,5,3,22.5,35.5],[230,4,5.5,3.5,23,36],[235,4.5,6,4,23.5,36.5],[235,5,6.5,4.5,23.5,37.5],[240,5.5,7,5,24,38],[240,6,7.5,5.5,24,38.5],[245,6.5,8,6,24.5,39],[250,7,8.5,6,25,40],[255,7.5,9,6.5,25.5,40.5],[260,8,9.5,7,26,41],[265,8.5,10,7.5,26.5,42],[270,9,10.5,8,27,42.5],[275,9.5,11,8.5,27.5,43],[280,10,11.5,9,28,44],[285,10.5,12,9.5,28.5,44.5],[290,11,12.5,10,29,45],[295,11.5,13,10.5,29.5,45.5],[300,12,13.5,11,30,46]];
 const totOf = (p, r) => p + buyFee(p) + F.ship[r];
-const new95 = s => { const z = sizeOf(s); return z ? (z.fast ?? z.normal) : null; };  // 95점은 빠른배송으로 오므로 같은 사이즈 빠른배송 새 상품과 비교
+const new95 = s => { const z = sizeOf(s); return z ? minNN(z.fast, z.normal) : null; };  // 95점은 빠른배송으로 오므로 같은 사이즈 빠른배송 새 상품과 비교
 const sizeAt = (field, v) => (DATA.sizes.find(z => (field === "buy" ? minNN(z.fast, z.normal) : z.bid) === v) || {}).s;
 
 /* 22 · F-03 최근 거래 기준 — basis: n30 최근 30건 | d30 최근 30일 */
@@ -960,23 +1014,21 @@ function priceTrio(opt){
   const all = opt === "all", lb = lowestBuy(opt), hb = highestBid(opt), last = tradesOf(opt)[0];
   const lbS = all && lb != null ? sizeAt("buy", lb) : null, hbS = all && hb != null ? sizeAt("bid", hb) : null;
   const cell = (k, v, d, sz) => `<div><div class="k">${k}</div><div class="v">${v != null ? won(v) + "원" : "-"}</div><div class="d">${d}${sz ? ` · ${SL(sz)}` : ""}</div></div>`;
-  const note = lb == null || hb == null ? ""
-    : all && hb > lb ? ""
-    : `<div class="p3n">즉시 구매가는 판매자가 건 가장 낮은 가격, 즉시 판매가는 구매자가 건 가장 높은 가격이에요.${all ? " 여러 사이즈 가격이 섞여 있어요." : lb > hb ? ` 두 가격 사이 ${won(lb - hb)}원은 아직 체결되지 않은 차이예요.` : ""}</div>`;
-  return `<div class="nw" data-req="22 · F-02"><div class="p3">${cell("즉시 구매가", lb, "국내 새 상품 · 수수료·배송비 전", lbS)}${cell("즉시 판매가", hb, "바로 팔 때 · 수수료 전", hbS)}${cell("최근 거래가", last ? last.price : null, "실제로 거래된 가격", all && last ? last.s : null)}</div>${note}</div>`;
+  const note = "";  // 10/21: 설명 상자 대신 즉시 판매가 옆 ⓘ (원래 앱 화면 유지)
+  return `<div class="nw" data-req="22 · F-02"><div class="p3">${cell("즉시 구매가", lb, "국내 일반 상품 · 수수료·배송비 전", lbS)}${cell("즉시 판매가", hb, "바로 팔 때 · 수수료 전", hbS)}${cell("최근 거래가", last ? last.price : null, "실제로 거래된 가격", all && last ? last.s : null)}</div><div class="p3m"><button class="p3l" data-a="info" data-k="prices">가격 설명${I.info}</button></div>${note}</div>`;
 }
 function avgBlock(opt, where){
   const st = stats(opt, S.basis), now = lowestBuy(opt);
   const lab = basisLabel(S.basis, st);
-  const head = `<div class="h">${where === "product" ? `<span class="avh">${szBtn(opt, true)}<span>${lab} 평균 거래가</span></span>` : `<span>${SL(opt)} 사이즈 · ${lab} 평균 거래가</span>`}${where === "history" ? "" : `<span class="bs"><button class="${S.basis === "n30" ? "on" : ""}" data-a="basis" data-k="n30">30건</button><button class="${S.basis === "m1" ? "on" : ""}" data-a="basis" data-k="m1">30일</button></span>`}</div>`;
+  const head = `<div class="h">${where === "product" ? `<span class="avh">${szBtn(opt, true)}<span>평균 거래가</span></span>` : `<span>${SL(opt)} 사이즈 · 평균 거래가</span>`}${where === "history" ? "" : `<span class="bs"><button class="${S.basis === "n30" ? "on" : ""}" data-a="basis" data-k="n30">30건</button><button class="${S.basis === "m1" ? "on" : ""}" data-a="basis" data-k="m1">30일</button></span>`}</div>`;
   if (!st) return `<div class="avg nw" data-req="22 · F-03">${head}<div class="v" style="font-size:15px">거래 없음</div><div class="cap">${S.basis[0] === "n" ? "아직" : "이 기간 안에"} 체결된 거래가 없어요</div></div>`;
   const cnt = S.basis[0] === "n" && st.n < +S.basis.slice(1) ? `거래가 적어 ${st.n}건 기준` : `${st.n}건`;
-  return `<div class="avg nw" data-req="22 · F-03">${head}<div class="v">${won(st.avg)}원</div><div class="cap">${cnt} · ${ymd(new Date(st.from), true)} ~ ${ymd(new Date(st.to), true)} 체결 · 범위 ${won(st.lo)} ~ ${won(st.hi)}원 · <span style="white-space:nowrap">${S.ex95 ? "95점 제외" : "95점 포함"}</span></div>
+  return `<div class="avg nw" data-req="22 · F-03">${head}<div class="v">${won(st.avg)}원</div><div class="cap">${S.basis[0] === "n" ? (st.n < +S.basis.slice(1) ? `거래가 적어 ${st.n}건 기준 · ` : "") : `${st.n}건 · `}${ymd(new Date(st.from), true)} ~ ${ymd(new Date(st.to), true)} 체결 · 범위 ${won(st.lo)} ~ ${won(st.hi)}원</div>
     ${now != null ? `${rangeBar(now, st)}<div class="pos">지금 즉시 구매가 <b>${won(now)}원</b>은 ${whereText(now, st)}</div>` : ""}</div>`;
 }
 /* 22 · F-03 「95점 상품 제외」 — 시세 · 차트 · 평균 · 체결 목록에서 95점 체결을 뺀다(기본 켬) */
 function ex95Html(){
-  return `<button class="ex95 nw" data-req="22 · F-03" data-a="ex95" role="checkbox" aria-checked="${S.ex95}"><span class="cb ${S.ex95 ? "on" : ""}">${I.check}</span><span>95점 상품 제외</span><span class="sub">${S.ex95 ? "· 새 상품 거래만 보여요" : "· 95점 체결도 섞여 있어요(목록에 95점 표시)"}</span></button>`;
+  return `<button class="ex95 nw" data-req="22 · F-03" data-a="ex95" role="checkbox" aria-checked="${S.ex95}"><span class="cb ${S.ex95 ? "on" : ""}">${I.check}</span><span>95점 상품 제외</span><span class="sub">${S.ex95 ? "· 일반 상품 거래만 보여요" : "· 95점 체결도 섞여 있어요(목록에 95점 표시)"}</span></button>`;
 }
 /* 22 · F-01 사이즈 기준 */
 function marketBlock(opt, where){
@@ -1051,12 +1103,12 @@ function chart2(opt, basis){
   return `<div class="nw" data-req="22 · F-03"><svg class="chart" viewBox="0 0 360 ${H}">${grid}${marks}${avgL}</svg><div class="cap" style="margin:-8px 0 12px">${cap} · 점선 = ${basisLabel(basis, st)} 평균</div></div>`;
 }
 /* 04 · F-04·05 95점 */
-const DEF95 = `<div class="def95 nw" data-req="04 · F-04">95점은 검수 기준상 <b>정품이지만 하자가 확인된</b> 상품이에요. 가격은 판매자가 정한 희망가라 <b>새 상품보다 쌀 수도, 비쌀 수도 있어요.</b> 가격이 상태를 말해 주지는 않아요.</div>`;
+const DEF95 = `<div class="def95 nw" data-req="04 · F-04">95점은 검수 기준상 <b>정품이지만 하자가 확인된</b> 상품이에요.<br>판매자가 정한 가격이라 <b>일반 상품보다 쌀 수도, 비쌀 수도 있어요.</b><br>가격이 상태를 말해 주지는 않아요.</div>`;
 function cmp95Html(p){  // 04 · F-05 같은 사이즈 새 상품과 95점을 한 줄에서 비교
   if (!p.size) return "";
   const nb = new95(p.size), list = ITEMS95.filter(x => x.s === +p.size); if (!list.length) return "";
   const ps = list.map(x => x.price);
-  return `<div class="cmp95 nw" data-req="04 · F-05"><div><span class="k">${SL(p.size)} 새 상품</span><b>${nb != null ? won(nb) + "원" : "-"}</b><span class="d">빠른배송 즉시 구매가</span></div>
+  return `<div class="cmp95 nw" data-req="04 · F-05"><div><span class="k">${SL(p.size)} 즉시 구매가</span><b>${nb != null ? won(nb) + "원" : "-"}</b><span class="d">95점 · 해외배송 제외</span></div>
     <div><span class="k">95점 ${list.length}개</span><b>${won(Math.min(...ps))} ~ ${won(Math.max(...ps))}원</b><span class="d">판매자 희망가 · 상태는 상품마다</span></div></div>`;
 }
 const BOX95 = `<svg viewBox="0 0 64 64" width="54" height="54"><path d="M10 22l22-10 22 10v24L32 56 10 46z" fill="#ead9c1" stroke="#8a6d4b" stroke-width="1.5"/><path d="M10 22l22 10 22-10M32 32v24" fill="none" stroke="#8a6d4b" stroke-width="1.5"/><path d="M45 16l5 3-2 5" fill="none" stroke="#8a6d4b" stroke-width="1.6"/><ellipse cx="47" cy="20" rx="9" ry="7" fill="none" stroke="#ef6253" stroke-width="2"/></svg>`;
@@ -1136,20 +1188,18 @@ function cmp2Html(){
   const st = stats(String(c.size), "n30");
   const ex = Math.max(st ? Math.floor(st.avg / 1000) * 1000 : 0, iP != null ? iP + 1000 : 0, DATA.minBid), exF = sellFee(ex);
   const exBasis = st && Math.floor(st.avg / 1000) * 1000 === ex ? "최근 30건 평균 거래가" : "즉시 판매가보다 1,000원 높은 값";
-  return `<div class="cmp2 nw" data-req="16 · F-10">
-    <div class="${c.mode === "instant" ? "on" : ""}${iP == null ? " off" : ""}" role="button" tabindex="0" aria-pressed="${c.mode === "instant"}" data-a="scMode" data-m="instant"><div class="k"><span class="rd${c.mode === "instant" ? " on" : ""}"></span>즉시 판매</div><div class="d">바로 체결 · 즉시 판매가 ${iP != null ? won(iP) + "원" : "-"}</div>
-      <div class="v">${iP != null ? won(iP - iF) + "원" : "-"}</div><div class="f">${iP != null ? `수수료 ${won(iF)}원을 뺀 받을 금액` : "지금은 즉시 판매할 수 없어요"}</div></div>
-    <div class="${c.mode === "bid" ? "on" : ""}" role="button" tabindex="0" aria-pressed="${c.mode === "bid"}" data-a="scMode" data-m="bid"><div class="k"><span class="rd${c.mode === "bid" ? " on" : ""}"></span>판매 입찰</div><div class="d">희망가 등록 · 체결될 때까지 대기</div>
-      ${bP != null
-        ? `<div class="v">${won(bP - bF)}원</div><div class="f">희망가 ${won(bP)} − 수수료 ${won(bF)}원</div>`
-        : `<div class="v">${won(ex - exF)}원 <span class="exb">예시</span></div><div class="f">${won(ex)}원(${exBasis})에 등록하면 · 수수료 ${won(exF)}원</div>`}</div></div>`;
+  const card = (on, off, mode, name, amt, sub) => `<div class="${on ? "on" : ""}${off ? " off" : ""}" role="button" tabindex="0" aria-pressed="${on}" data-a="scMode" data-m="${mode}">
+      <div class="k"><span class="rd${on ? " on" : ""}"></span>${name}</div><div class="d">예상 실수령액</div><div class="v">${amt}</div>${sub ? `<div class="f">${sub}</div>` : ""}</div>`;
+  return `<div class="cmp2 nw" data-req="16 · F-10">${card(c.mode === "instant", iP == null, "instant", "즉시 판매", iP != null ? won(iP - iF) + "원" : "-", iP != null ? "" : "지금은 즉시 판매할 수 없어요")}${
+    bP != null ? card(c.mode === "bid", false, "bid", "판매 입찰", won(bP - bF) + "원", `${won(bP)}원에 등록 시`)
+               : card(c.mode === "bid", false, "bid", "판매 입찰", won(ex - exF) + "원", `${won(ex)}원에 등록 시`)}</div>`;
 }
 function penTable(price){
   const r = p => won(rnd(price * p));
   return `<div class="card nw" data-req="16 · F-11" style="margin-top:8px"><div class="bold" style="font-size:14px">이 거래 기준 페널티 · 판매가 ${won(price)}원</div>
-    <table class="pen"><tr><td>판매 거부 (거래 대기 ~ 1시간 이내)</td><td><b class="pp">5.0%</b> · ${r(.05)}원</td></tr>
-    <tr><td>판매 거부 (1시간 이후) · 발송 지연 · 미입고 · 구성품 누락 등</td><td><b class="pp">10.0%</b> · ${r(.10)}원</td></tr>
-    <tr><td>가품 · 사용감</td><td><b class="pp">15.0%</b> · ${r(.15)}원</td></tr></table>
+    <table class="pen"><tr><td>판매 거부 (거래 대기 ~ 1시간 이내)</td><td class="pa">-${r(.05)}원 (5%)</td></tr>
+    <tr><td>판매 거부 (1시간 이후) · 발송 지연 · 미입고 · 구성품 누락 등</td><td class="pa">-${r(.10)}원 (10%)</td></tr>
+    <tr><td>가품 · 사용감</td><td class="pa">-${r(.15)}원 (15%)</td></tr></table>
     <p class="note">· 판매가 기준 금액이에요. 정책 원문은 「페널티 정책」에서 확인할 수 있어요.</p></div>`;
 }
 
@@ -1240,7 +1290,7 @@ SCREENS.product = () => {
   const bs = S.prodOpt !== "all" ? +S.prodOpt : DATA.mySize, bz = sizeOf(bs), bBuy = bz ? minNN(bz.fast, bz.normal) : null, bSell = bz ? bz.bid : null, repS = sizeAt("buy", repPrice);
   const {list, so} = listFor(S.prodOpt, S.prodTab, null);
   const rows = list.slice(0,5).map(x=>({...x,_ago:true}));
-  const optName = S.prodOpt==="all" ? "모든 사이즈" : S.prodOpt;
+  const optName = S.prodOpt==="all" ? "모든 옵션" : S.prodOpt;
   const c95 = ITEMS95.slice().sort((a,b)=>a.price-b.price).slice(0,8);
   const conv = DATA.sizeTable || CONV, convH = DATA.sizeTable ? ["EU","KR","UK","US"] : ["KR","US (M)","US (W)","UK","JP","EU"];
   return `<div class="screen">
@@ -1300,7 +1350,7 @@ SCREENS.product = () => {
       <h3>95점 동일 상품 <button data-a="info" data-k="about95" aria-label="95점 안내">${I.info}</button></h3>
       ${DEF95}
       <div class="c95">${c95.map(x=>{ const z=sizeOf(x.s); const dc = z.normal? Math.round((x.price-z.normal)/z.normal*100):null;
-        return `<button data-a="open95" data-s="${x.s}" data-id="${x.id}"><div class="im"><span class="badge95">95</span>${shoe()}</div><div class="sz">${SL(x.s)}</div><div class="st nw" data-req="04 · F-05">상태 · ${x.defect.split(" · ")[0]}</div><div class="pr">${won(x.price)}원</div>${diff95(x)?`<div class="df${x.price < (new95(x.s) ?? 0) ? " lo" : ""}">새 상품보다 ${diff95(x)}</div>`:""}</button>`;}).join("")}</div>
+        return `<button data-a="open95" data-s="${x.s}" data-id="${x.id}"><div class="im"><span class="badge95">95</span>${shoe()}</div><div class="sz">${SL(x.s)}</div><div class="st nw" data-req="04 · F-05">상태 · ${x.defect.split(" · ")[0]}</div><div class="pr">${won(x.price)}원</div>${new95(x.s) != null ? `<div class="df">즉시 구매가 ${won(new95(x.s))}원</div>` : ""}</button>`;}).join("")}</div>
       <button class="more" data-a="open95" data-s="">95점 동일 상품 더보기</button>
     </div>
     <div class="brand"><div class="lg">${P.logo || "NIKE"}</div><div><div class="bold">${P.brand}</div><div class="sub" style="font-size:12px">${P.brandKo} · 관심 ${P.brandWish}</div></div><span style="margin-left:auto">${I.chev}</span></div>
@@ -1380,7 +1430,7 @@ SCREENS.checkout = () => {
       <div class="card">${c.customs?`<div style="font-size:14px">P1234****5678 <span class="sub">· ${U.name}</span></div>`:`<div class="warnbox">등록된 정보가 없습니다.<br>받는 분의 통관부호를 추가해주세요!</div>`}</div>
       <p class="cnote">구매액이 <em>면세한도($150)를 초과</em>하면 관부가세가 부과될 수 있습니다.</p></div>`:""}
     <div class="blk"><div class="bh"><h3>배송 방법</h3></div>
-      ${dms.map(([k,n,p,d])=>`<button class="dm ${c.dm===k?"on":""}" data-a="coDm" data-k="${k}"><div class="a"><span>${n}</span><span>${p}</span></div><div class="b">${d}</div>${dmMore(k, c.route)}</button>`).join("")}</div>
+      <div class="card dmr">${dms.map(([k,n,p,d])=>`<button class="dmo ${c.dm===k?"on":""}" data-a="coDm" data-k="${k}"><span class="radio ${c.dm===k?"on":""}"></span><span class="tx"><span class="n">${n}${k==="storage" ? `<span class="pill-w nw" data-req="12 · F-08">집으로 배송되지 않아요</span>` : ""}</span>${k==="storage" ? `<span class="d">창고에 보관 후 판매하는 옵션</span><span class="lk nw" data-req="12 · F-08" data-a="info" data-k="storageFee">추가 출고 비용 확인 ›</span>` : `<span class="g nw" data-req="12 · F-08">받는 곳: 등록한 배송지</span><span class="d">${d}</span>`}</span></button>`).join("")}<button class="dmc nw" data-req="12 · F-09" data-a="info" data-k="cancel_${c.route}"><span>취소·반품 조건 확인</span>${I.chev}</button></div></div>
     <div class="blk"><div class="bh"><h3>주문 상품 및 쿠폰</h3><span class="bold">총 1건</span></div>
       <div class="coupon"><span>적용할 쿠폰이 없습니다</span><span class="tg"></span></div>
       <div class="card"><div class="oi"><div class="im">${shoe()}</div><div style="flex:1;min-width:0">
@@ -1423,7 +1473,7 @@ SCREENS.p95 = () => {
       ${cmp95Html(p)}
       ${list.map(x=>`<button class="i95 ${p.sel===x.id?"on":""}" data-a="pick95" data-id="${x.id}">
         <div class="top"><span><span class="badge95">95점</span> <b style="margin-left:4px">${SL(x.s)}</b></span><span class="bold">${won(x.price)}원</span></div>
-        ${diff95(x)?`<div class="cap nw" data-req="04 · F-05" style="text-align:right">판매자 희망가 · 같은 사이즈 새 상품(${won(new95(x.s))}원)보다 ${diff95(x)}</div>`:""}
+        ${diff95(x)?`<div class="cap nw" data-req="04 · F-05" style="text-align:right">판매자 희망가 · 같은 사이즈 즉시 구매가 ${won(new95(x.s))}원</div>`:""}
         <div class="ph">${insImgs(x)}</div>
         <div class="ins nw" data-req="04 · F-05"><div><span class="k">상태</span>${x.defect}</div><div style="margin-top:4px"><span class="k">크기</span>${x.dsize}</div></div>
         <div class="sub" style="font-size:12px;margin-top:8px">${bolt} 빠른배송 · 내일 ${md(tomorrow())} 도착 예정</div></button>`).join("")||`<div class="empty sub" style="padding:40px 0;text-align:center">95점 상품이 없습니다.</div>`}
@@ -1464,29 +1514,28 @@ SCREENS.sellConfirm = () => {
   const c = S.sc, z = sizeOf(c.size), inst = c.mode==="instant", noInst = z.bid==null;
   const n = scNumbers();
   return `<div class="screen">
-  <div class="hd"><button class="ic" data-a="pop">${I.backS}</button><div class="t">${inst?"즉시 판매하기":"판매 입찰하기"}</div></div>
+  <div class="hd"><button class="ic pl-circ" data-a="pop">${I.x}</button><div class="t">${inst?"즉시 판매하기":"판매 입찰하기"}</div><div class="sp"></div><button class="pill" data-a="info" data-k="inspect" style="background:#fff">검수 기준</button></div>
   <div class="body" data-sc="body-sellConfirm">
-    ${prow({size:c.size})}
+    <div class="prow2"><div class="im">${shoe()}</div><div style="min-width:0"><div class="ko">${esc(DATA.product.ko)}</div><div class="en">${esc(DATA.product.en)}</div><div class="md">${DATA.product.model}</div><div class="szl">${SL(c.size)}</div></div></div><div class="band"></div>
     <div class="pdec">
-      <ul class="plist"><li><div class="t">즉시 구매가</div><div class="v">${z.normal?won(z.normal)+"원":"-"}</div></li><li><div class="t">즉시 판매가</div><div class="v">${z.bid?won(z.bid)+"원":"-"}</div></li></ul>
+      <ul class="plist plist2"><li><div class="t">즉시 구매가</div><div class="v">${z.normal?won(z.normal)+"원":"-"}</div></li><li><div class="t">즉시 판매가</div><div class="v">${z.bid?won(z.bid)+"원":"-"}</div></li></ul>
       <div id="cmp2">${cmp2Html()}</div>
-      <div class="pnow ${c.warn?"warn":""}">
+      <div class="pnow pnow2 ${c.warn?"warn":""}">
         <div class="t">${inst?"즉시 판매가":"판매 희망가"}</div>
         <div class="v">${inst?`<span class="amt">${won(z.bid)}</span>`:`<input id="askIn" type="tel" inputmode="numeric" placeholder="희망가 입력" value="${c.price?won(c.price):""}" data-in="scPrice" autocomplete="off">`}<span class="unit">원</span></div>
       </div>
       <div class="pwarn" id="scWarn">${c.warn?"2만원 부터 천원단위로 입력하세요.":""}</div>
       <div class="bind">
-        <div class="line"><span class="k">검수비</span><span class="v">무료</span></div>
-        <div class="line"><span class="k"><span id="scFeeK">수수료${n.price?` (${(F.sellRate*100).toFixed(1)}%)`:""}</span> <button data-a="feeTip" aria-label="수수료 안내">${I.info}</button></span><span class="v" id="scFee">${n.fee!=null?"-"+won(n.fee)+"원":"-"}</span></div>
+        <div class="line"><span class="k">검수비</span><span class="v" id="scIns">${n.price?"무료":"-"}</span></div>
+        <div class="line"><span class="k"><span id="scFeeK">수수료</span> <button class="qb" data-a="feeTip" aria-label="수수료 안내"><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="rgba(34,34,34,.4)" stroke-width="1.4"><circle cx="10" cy="10" r="8.3"/><path d="M7.7 7.9a2.3 2.3 0 1 1 3.4 2c-.7.4-1.1.8-1.1 1.6v.5" stroke-linecap="round"/><circle cx="10" cy="14.2" r=".45" fill="rgba(34,34,34,.4)"/></svg></button></span><span class="v" id="scFee">${n.fee!=null?"-"+won(n.fee)+"원":"-"}</span></div>
         <div class="line"><span class="k">배송비</span><span class="v">선불 ・ 판매자 부담</span></div>
       </div>
     </div>
-    ${inst?"":`<div class="dl"><h3>입찰 마감기한</h3><div class="txt">${c.exp}일 (${ymd(addDays(c.exp))} 마감)</div>
-      <div class="opts">${DATA.bidDays.map(d=>`<button class="${c.exp===d?"on":""}" data-a="scExp" data-d="${d}">${d}일</button>`).join("")}</div></div>`}
+    ${inst?"":`<div class="dl dl2"><h3>입찰 마감기한</h3><button class="dlrow" data-a="openExp"><span>${c.exp}일 (${ymd(addDays(c.exp))} 마감)</span><span class="dd">${I.down}</span></button></div>`}
   </div>
-  <div class="cfoot">
-    <div class="tot"><span class="t">정산금액</span><span class="v green" id="scPay">${n.payout!=null?won(n.payout)+"원":"-"}</span></div>
-    <button class="btn green" id="scGo" data-a="scGo" ${(!inst && !c.valid)?"disabled":""}>${inst?"즉시 판매 계속":"판매 입찰 계속"}</button>
+  <div class="cfoot cfoot2">
+    <div class="tot"><span class="t">정산금액</span><span class="v green" id="scPay">${n.payout!=null?won(n.payout)+"원":"-원"}</span></div>
+    <button class="btn dark" id="scGo" data-a="scGo" ${(!inst && !c.valid)?"disabled":""}>${inst?"즉시 판매 계속":"판매 입찰 계속"}</button>
   </div></div>`;
 };
 
@@ -1499,7 +1548,7 @@ const SELL_AGREES = [
 ];
 SCREENS.sellOrder = () => {
   const o = S.so, U = DATA.user, inst = o.mode==="instant";
-  const fee = sellFee(o.price), payout = o.price - fee, all = o.a.every(Boolean);
+  const fee = sellFee(o.price), payout = o.price - fee, all = true;
   return `<div class="screen co">
   <div class="hd" style="background:#f5f5f7"><button class="ic" data-a="pop">${I.backS}</button><div class="t">주문/정산</div><div class="sp"></div><button class="pill" style="background:#fff" data-a="info" data-k="inspect">검수 기준</button></div>
   <div class="body" data-sc="body-sellOrder">
@@ -1520,7 +1569,7 @@ SCREENS.sellOrder = () => {
       <div class="line"><span class="k">배송비</span><span class="v">선불 ・ 판매자 부담</span></div>
       ${inst?"":`<div class="line"><span class="k">입찰 마감기한</span><span class="v">${o.exp}일 - ${ymd(addDays(o.exp),true)}까지</span></div>`}
       <div class="sum"><span class="t">정산금액</span><span class="v green">${won(payout)}원</span></div></div></div>
-    <div class="blk" style="padding-bottom:24px"><div class="card">${SELL_AGREES.map((t,i)=>`<button class="chk" data-a="soToggle" data-i="${i}"><span class="cb ${o.a[i]?"on":""}">${I.check}</span><span>${t}${i===2?` <b class="nw" data-req="16 · F-11">(이 거래 최대 ${won(rnd(o.price*.15))}원)</b>`:""}</span></button>`).join("")}</div></div>
+    <div style="height:24px"></div>
   </div>
   <div class="cfoot">
     <div class="tot"><span class="t">정산금액</span><span class="v green">${won(payout)}원</span></div>
@@ -1540,7 +1589,7 @@ SHEETS.buySheet = () => {
     const r = b.route, rows = [];
     if (z.fast) rows.push(`<button class="rt ${r==="fast"?"on":""}" data-a="buyRoute" data-r="fast"><span class="radio ${r==="fast"?"on":""}"></span><span class="nm">빠른배송 ${bolt}</span><span class="ds">내일 도착</span>${r==="fast"?"":`<span class="rtw"><span class="pr">${won(z.fast)}원</span><span class="tot2 nw" data-req="08 · F-06">총 ${won(totOf(z.fast,"fast"))}원</span></span>`}</button>
       ${r==="fast"?`<button class="opt on" data-a="buyRoute" data-r="fast"><span>내일 ${md(t1)} 도착 예정</span><span class="rtw"><span class="pr">${won(z.fast)}원</span><span class="tot2 nw" data-req="08 · F-06">총 ${won(totOf(z.fast,"fast"))}원</span></span></button>`:""}
-      ${z.p95?`<button class="opt" data-a="open95" data-s="${z.s}"><span>내일 ${md(t1)} 도착 예정</span><span class="rtw"><span><span class="badge95">95점</span> <span class="pr" style="font-weight:500">${won(z.p95)}원~</span></span><span class="tot2 nw" data-req="04 · F-05">빠른배송 새 상품보다 ${z.p95 < z.fast ? won(z.fast - z.p95) + "원 쌈" : z.p95 > z.fast ? won(z.p95 - z.fast) + "원 비쌈" : "같음"}</span></span></button>`:""}`);
+      ${z.p95?`<button class="opt opt95" data-a="open95" data-s="${z.s}"><span>내일 ${md(t1)} 도착 예정</span><span class="rtw"><span><span class="badge95">95점</span> <span class="pr" style="font-weight:500">${won(z.p95)}원~</span></span></span><span class="d95 nw" data-req="04 · F-04"><b>95점</b>은 미착용이지만 검수에서 하자가 확인된 상품이에요. 가격은 판매자가 정해서 비싸다고 상태가 더 좋은 건 아니에요. <u>하자 사진 보기</u> ›</span></button>`:""}`);
     rows.push(`<button class="rt ${r==="normal"?"on":""}" data-a="buyRoute" data-r="normal"><span class="radio ${r==="normal"?"on":""}"></span><span class="nm">일반배송</span><span class="ds">5-7영업일</span><span class="rtw"><span class="pr">${z.normal?won(z.normal)+"원":"구매입찰"}</span>${z.normal?`<span class="tot2 nw" data-req="08 · F-06">총 ${won(totOf(z.normal,"normal"))}원</span>`:""}</span></button>`);
     if (z.overseas) rows.push(`<button class="rt ${r==="overseas"?"on":""}" data-a="buyRoute" data-r="overseas"><span class="radio ${r==="overseas"?"on":""}"></span><span class="nm">해외배송</span><span class="ds">6-10영업일</span><span class="rtw"><span class="pr">${won(z.overseas)}원</span><span class="tot2 nw" data-req="08 · F-06·07">예상 총 ${won(totOf(z.overseas,"overseas") + dutyEst(z.overseas).tax)}원</span><span class="tax nw" data-req="08 · F-07">관부가세 예상 ${won(dutyEst(z.overseas).tax)}원 포함</span></span></button>`);
     const main = r==="normal" ? (z.normal?"즉시 구매 / 구매 입찰":"구매 입찰") : "즉시 구매하기";
@@ -1549,9 +1598,9 @@ SHEETS.buySheet = () => {
   }
   return `<div class="sheet" style="height:92%">
     <div class="handle"></div>
-    <div class="sh-t">구매하기<small>(가격 단위: 원)</small><button class="ic sh-x" data-a="closeSheet">${I.x}</button></div>
+    <div class="sh-t">구매하기<small>(가격 단위: 원)<button class="iib" data-a="info" data-k="gridPrice" aria-label="설명 보기">${I.info}</button></small><button class="ic sh-x" data-a="closeSheet">${I.x}</button></div>
     ${prow()}
-    <div class="sh-body" data-sc="sh-buySheet" style="padding:0;border-top:1px solid var(--line)">${szInfoHtml(z)}<div class="gcap nw" data-req="08 · F-16 제안">가격은 국내 새 상품 최저가예요 · 95점·해외배송은 사이즈를 고른 뒤 비교해요</div><div class="grid">${grid}</div></div>
+    <div class="sh-body" data-sc="sh-buySheet" style="padding:0;border-top:1px solid var(--line)">${szInfoHtml(z)}<div class="grid">${grid}</div></div>
     ${panel}
   </div>`;
 };
@@ -1560,9 +1609,8 @@ SHEETS.sellSheet = () => {
   const s = S.sell, z = s.size ? sizeOf(s.size) : null;
   const grid = DATA.sizes.map(x => `<button class="sz ${s.size===x.s?"on":""}" data-a="sellSize" data-s="${x.s}">${x.s===DATA.mySize?'<span class="mysz nw" data-req="19 · 제안">MY</span>':""}<b>${SL(x.s)}</b>${KRl(x.s)}${x.bid?`<span class="p green">${won(x.bid)}</span>`:`<span class="p none">판매입찰</span>`}</button>`).join("");
   const panel = z && !s.pc ? `<div class="panel"><div class="handle" data-a="panelDown" style="margin-bottom:4px;cursor:pointer" title="사이즈 다시 고르기"></div>
-      <div class="rt on" style="cursor:default"><span class="nm">일반 판매</span><span class="ds">선불 발송 · 검수 후 정산</span><span class="pr" style="color:var(--green);font-weight:700">${z.bid?won(z.bid)+"원":"판매입찰"}</span></div>
       ${z.bid?`<div class="brk nw" data-req="16 · F-10">즉시 판매가 ${won(z.bid)} − 수수료 ${won(sellFee(z.bid))} = <b>받을 금액 ${won(z.bid-sellFee(z.bid))}원</b></div>`:""}
-      <div class="btns"><button class="btn dark" data-a="toast" data-m="보관 판매는 이 화면에서 지원하지 않아요">보관 판매</button><button class="btn green" data-a="sellGo">${z.bid?"즉시 판매 / 판매 입찰":"판매 입찰"}</button></div></div>` : "";
+      <div class="btns sbtns"><button class="btn dark" data-a="toast" data-m="보관 신청은 테스트 범위 밖이에요"><span class="l1"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 2.4l8.6 4.7v9.8L12 21.6l-8.6-4.7V7.1z" fill="#fff"/><path d="M3.7 7.2L12 11.8l8.3-4.6M12 11.8v9.6" stroke="#222" stroke-width="1.3" fill="none" stroke-linejoin="round"/><path d="M16.9 11.6l-3 4.3h2l-1 3.6 3.2-4.6h-2l.8-3.3z" fill="#41b979"/></svg>보관 신청</span><span class="l2">선불 발송</span></button><button class="btn green" data-a="sellGo"><span class="l1">${z.bid?won(z.bid-sellFee(z.bid))+"원":"판매 입찰"}</span><span class="l2">선불 발송</span></button></div></div>` : "";
   return `<div class="sheet" style="height:92%">
     <div class="handle"></div>
     <div class="sh-t">판매하기<small>(가격 단위: 원)</small><button class="ic sh-x" data-a="closeSheet">${I.x}</button></div>
@@ -1574,9 +1622,9 @@ SHEETS.sellSheet = () => {
 
 SHEETS.optPicker = (sh) => {
   const cur = sh.t==="product" ? S.prodOpt : S.hist.opt;
-  return `<div class="sheet"><div class="handle"></div><div class="sh-t">사이즈 선택<button class="ic sh-x" data-a="closeSheet">${I.x}</button></div>
+  return `<div class="sheet"><div class="handle"></div><div class="sh-t">옵션 선택<button class="ic sh-x" data-a="closeSheet">${I.x}</button></div>
     <div class="sh-body" data-sc="sh-optPicker"><div class="grid" style="padding:12px 0">
-      <button class="sz ${cur==="all"?"on":""}" data-a="pickOpt" data-t="${sh.t}" data-s="all"><b>모든 사이즈</b></button>
+      <button class="sz ${cur==="all"?"on":""}" data-a="pickOpt" data-t="${sh.t}" data-s="all"><b>모든 옵션</b></button>
       ${DATA.sizes.map(x=>`<button class="sz ${cur===String(x.s)?"on":""}" data-a="pickOpt" data-t="${sh.t}" data-s="${x.s}">${x.s===DATA.mySize?'<span class="mysz nw" data-req="19 · 제안">MY</span>':""}<b>${SL(x.s)}</b>${KRl(x.s)}</button>`).join("")}
     </div></div></div>`;
 };
@@ -1607,7 +1655,7 @@ SHEETS.history = () => {
     <div class="dr-hd">거래 및 입찰 내역<button class="ic" data-a="closeSheet">${I.x}</button></div>
     <div class="dr-body" data-sc="sh-history" id="histBody">
       ${prow().replace('class="prow"','class="prow" style="padding:4px 0 12px"')}
-      <button class="optsel" data-a="openOpt" data-t="history"><span>${h.opt==="all"?"모든 사이즈":SL(h.opt) + KRs(h.opt)}</span><span class="dn">${I.down}</span></button>
+      <button class="optsel" data-a="openOpt" data-t="history"><span>${h.opt==="all"?"모든 옵션":SL(h.opt) + KRs(h.opt)}</span><span class="dn">${I.down}</span></button>
       ${marketBlock(h.opt, "history")}
       <div class="rs"><b>최근 시세</b>${periodChange(h.opt, S.basis)}<button class="al" data-a="toast" data-m="가격 알림은 앱에서 받을 수 있어요">+ 가격 알림 받기</button></div>
       <div class="bmode nw" data-req="22 · F-02·03"><span class="cap" style="margin:0">시세 기준</span><div class="seg sm">${[["d","기간"],["n","건수"]].map(([k,l])=>`<button class="${(S.basis[0]==="n")===(k==="n")?"on":""}" data-a="bMode" data-k="${k}">${l}</button>`).join("")}</div></div>
@@ -1629,7 +1677,7 @@ const INFO = {
   delivery: ["배송 안내", `<table><tr><td>빠른배송</td><td>5,000원</td></tr><tr><td class="sub">내일 ${md(tomorrow())} 도착 예정</td><td></td></tr><tr><td>일반배송</td><td>3,000원</td></tr><tr><td class="sub">5-7영업일 내 도착 예정</td><td></td></tr><tr><td>해외배송</td><td>3,000원 + 관부가세 별도</td></tr><tr><td class="sub">6-10영업일 내 도착 예정</td><td></td></tr><tr><td>창고보관</td><td>첫 30일 무료</td></tr><tr><td class="sub">집으로 배송되지 않음 · 보관 창고에 둠</td><td></td></tr></table><p class="note">· 관부가세는 결제 금액에 포함되지 않아요. 면세한도($150)를 넘으면 따로 내야 해요.</p>`],
   cancel: ["취소 및 반품 안내", `<table><tr><td>결제 후 30분 이내</td><td>무료 취소</td></tr><tr><td>판매자 발송 전</td><td>취소 수수료 5,000원</td></tr><tr><td>판매자 발송 후</td><td>취소 불가</td></tr></table>
     <ul style="margin-top:12px"><li>빠른배송 상품은 결제 후 30분 이내에만 취소할 수 있습니다.</li><li>결제 후 30분이 지나면 자동으로 구매 결정됩니다.</li><li>주문 취소는 계정당 하루 최대 5회까지 가능합니다.</li><li>해외배송 상품은 발송 후 취소 여부를 따로 문의해야 하며, 반품 비용이 국내 배송보다 높을 수 있습니다.</li></ul>`],
-  about95: ["95점 상품", `<p>검수 기준에 따라 정품이지만 일부 하자(박스 손상, 미세 오염 등)가 확인된 상품입니다.</p><p style="margin-top:8px">상품마다 검수 상세에서 하자 내용과 검수 이미지를 확인할 수 있습니다.</p><p style="margin-top:8px"><b>가격은 판매자가 정한 희망가</b>예요. 그래서 같은 사이즈 새 상품보다 쌀 수도, 비쌀 수도 있고, 가격이 상태를 말해 주지는 않아요.</p>`],
+  about95: ["95점 상품", `<p>검수 기준에 따라 정품이지만 일부 하자(박스 손상, 미세 오염 등)가 확인된 상품입니다.</p><p style="margin-top:8px">상품마다 검수 상세에서 하자 내용과 검수 이미지를 확인할 수 있습니다.</p><p style="margin-top:8px"><b>가격은 판매자가 정한 희망가</b>예요. 그래서 같은 사이즈 일반 상품보다 쌀 수도, 비쌀 수도 있고, 가격이 상태를 말해 주지는 않아요.</p>`],
   inspect: ["검수 기준", `<p>카테고리별 검수 기준에 따라 정품 여부, 사이즈, 구성품, 박스와 상품 상태를 확인합니다.</p><p style="margin-top:8px" class="sub">자세한 기준은 고객센터의 검수 기준에서 확인할 수 있습니다.</p>`],
   penalty: ["페널티 정책", `<table><tr><td>판매 거부 (거래 대기 ~ 1시간 이내)</td><td class="pp">5.0%</td></tr><tr><td>판매 거부 (1시간 이후)</td><td class="pp">10.0%</td></tr><tr><td>발송 지연 (체결 후 48시간 이내 발송 정보 미입력)</td><td class="pp">10.0%</td></tr><tr><td>미입고 (발송 정보 입력 후 5일 이내 미도착)</td><td class="pp">10.0%</td></tr><tr><td>가송장 등 허위 정보 입력</td><td class="pp">10.0%</td></tr><tr><td>거래 체결 전 상품 발송</td><td class="pp">10.0%</td></tr><tr><td>상품·사이즈 불일치, 기본 구성품 누락</td><td class="pp">10.0%</td></tr><tr><td>가품 · 사용감</td><td class="pp">15.0%</td></tr></table>
     <p class="note">· 페널티는 판매 금액의 최대 15%(최대 100만원)를 카드로 결제합니다.</p>`]
@@ -1644,6 +1692,11 @@ SHEETS.done = sh => `<div class="sheet center"><div class="modal"><h4>${sh.title
 /* ============================== ACTIONS ============================== */
 const A = {};
 A.toast = d => { toast(d.m); log(`탭: ${d.m}`); };
+INFO.prices = ["즉시 구매가 · 즉시 판매가", `<p>즉시 구매가는 판매자들이 등록한 판매 희망가 중 가장 낮은 가격, 즉시 판매가는 구매자들이 등록한 구매 희망가 중 가장 높은 가격이에요.</p><p style="margin-top:8px">두 가격이 같아지면 거래가 체결돼요. 그래서 같은 사이즈에서는 즉시 판매가가 즉시 구매가보다 낮아요.</p><p style="margin-top:8px">최근 거래가는 마지막으로 체결된 가격이에요.</p>`];
+INFO.gridPrice = ["사이즈별 가격", `<p>사이즈 칸의 가격은 95점 상품과 해외배송을 뺀 국내 상품 중 가장 낮은 가격이에요.</p><p style="margin-top:8px">95점 상품과 해외배송은 사이즈를 고르면 아래에서 총액과 함께 비교할 수 있어요.</p>`];
+INFO.storageFee = ["창고보관 비용", `<p>창고보관을 고르면 상품을 배송받지 않고 창고에 보관해 두고 판매할 수 있어요. 집으로는 배송되지 않아요.</p><table style="margin-top:12px"><tr><td>보관 기간</td><td>최대 120일</td></tr><tr><td>창고 이용료</td><td>30일마다 3,000원 (지금은 첫 30일 무료)</td></tr><tr><td>집으로 받기 (회수 신청)</td><td>배송비 5,000원</td></tr></table><ul style="margin-top:12px"><li>무료 기간 중에 회수를 신청해도 창고 이용료와 회수 배송비가 붙어요.</li></ul>`];
+[["fast", "빠른배송"], ["normal", "일반배송"], ["overseas", "해외배송"]].forEach(([k, n]) => {
+  INFO["cancel_" + k] = ["취소 및 반품 안내", `<div class="cxl nw" data-req="12 · F-09"><div class="h">이 거래 (${n})</div><div>${CANCEL[k]}</div></div>` + INFO.cancel[1]]; });
 A.pop = () => pop();
 A.openProduct = () => { S.prodOpt = MYOPT(); S.hist.opt = MYOPT(); push("product"); };
 A.myToggle = () => { DATA.mySize = DATA.mySize ? null : MY0; S.prodOpt = MYOPT(); S.hist.opt = MYOPT(); S.buy = {size:null, route:null}; S.sell = {size:null};
@@ -1708,8 +1761,11 @@ A.sellGo = () => { S.sck = {size:S.sell.size, c:SELL_CHECKS.map(()=>true)}; A.sc
 A.sckToggle = (d, el, e) => { if (e.target.closest(".lk")) return; S.sck.c[+d.i] = !S.sck.c[+d.i]; log(`판매 전 확인 ${+d.i+1}: ${S.sck.c[+d.i]?"체크":"해제"}`); render(); };
 A.sckGo = () => { const z = sizeOf(S.sck.size); S.sc = {size:S.sck.size, mode: z.bid ? "instant" : "bid", price:null, valid:false, warn:false, exp:DATA.bidDefault}; push("sellConfirm"); };
 A.scMode = d => { const c = S.sc; if (d.m==="instant" && sizeOf(c.size).bid==null) return; c.mode = d.m; if (d.m==="instant"){ c.price=null; c.valid=false; c.warn=false; } log(`판매 탭: ${d.m==="instant"?"즉시 판매":"판매 입찰"}`); render(); };
+A.openExp = () => openSheet("expPick");
+A.scExpPick = d => { S.sc.exp = +d.d; log(`입찰 마감기한: ${d.d}일`); closeSheet(); };
+SHEETS.expPick = () => `<div class="sheet"><div class="handle"></div><div class="sh-t">입찰 마감기한</div><div class="sh-body" data-sc="sh-expPick"><div class="grid" style="padding:12px 0 8px">${DATA.bidDays.map(d => `<button class="sz ${S.sc.exp === d ? "on" : ""}" data-a="scExpPick" data-d="${d}"><b>${d}일</b></button>`).join("")}</div></div></div>`;
 A.scExp = d => { S.sc.exp = +d.d; log(`입찰 마감기한: ${d.d}일`); render(); };
-A.feeTip = () => { toast("판매 수수료 = 기본 2,500원 + 판매가의 6.0% (VAT 별도)"); log("수수료 안내 아이콘"); };
+A.feeTip = () => { toast("기본 2,500원 + 등급 6.0% (VAT 별도)", true); log("수수료 안내 아이콘"); };
 A.scGo = () => { const c = S.sc, n = scNumbers(); if (c.mode==="bid" && !c.valid) return;
   S.so = {size:c.size, mode:c.mode, price:n.price, exp:c.exp, a:SELL_AGREES.map(()=>false)};
   log(`${c.mode==="instant"?"즉시 판매 계속":"판매 입찰 계속"} (${won(n.price)}원 · 정산 ${won(n.payout)}원)`); push("sellOrder"); };
@@ -1727,8 +1783,9 @@ function syncPrice(kind){
   const g = $(kind==="bc"?"#bcGo":"#scGo"); if (g) g.disabled = st.mode==="bid" && !st.valid;
   if (kind==="sc"){ const n = scNumbers();
     $("#scFee").textContent = n.fee!=null ? "-"+won(n.fee)+"원" : "-";
-    $("#scPay").textContent = n.payout!=null ? won(n.payout)+"원" : "-";
-    $("#scFeeK").textContent = n.price ? `수수료 (${(F.sellRate*100).toFixed(1)}%)` : "수수료";
+    $("#scPay").textContent = n.payout!=null ? won(n.payout)+"원" : "-원";
+    $("#scFeeK").textContent = "수수료";
+    if ($("#scIns")) $("#scIns").textContent = n.price ? "무료" : "-";
     const cm = $("#cmp2"); if (cm) cm.innerHTML = cmp2Html(); }
   if (kind==="bc"){ const bb = $("#bcBind"); if (bb) bb.innerHTML = bcBindHtml();
     const bt = $("#bcTot"); if (bt){ const n = bcNums(); bt.textContent = n ? won(n.total)+"원" : "-"; } }
