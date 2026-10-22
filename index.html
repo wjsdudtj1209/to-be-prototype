@@ -1153,9 +1153,7 @@ function brkHtml(z, r){
   const pay = p + fee + ship;
   if (r !== "overseas") return `<div class="brk nw" data-req="08 · F-06">${won(p)} + 수수료 ${won(fee)} + 배송비 ${won(ship)} = <b style="white-space:nowrap">결제 ${won(pay)}원</b> <span class="sub">(확정)</span></div>`;
   const e = dutyEst(p);
-  return `<div class="brk nw" data-req="08 · F-06·07">${won(p)} + 수수료 ${won(fee)} + 배송비 ${won(ship)} = 결제 ${won(pay)}원 <span class="sub">(확정)</span><br>
-    + 관부가세 <b>예상 ${won(e.tax)}원</b> <span class="sub">(${dutyWhy(e)} · 결제 금액에 없음)</span><br>
-    = <b style="white-space:nowrap">예상 총 부담 ${won(pay + e.tax)}원</b></div>`;
+  return `<div class="brk nw" data-req="08 · F-06·07">${won(p)} + 수수료 ${won(fee)} + 배송비 ${won(ship)} + 관부가세 ${won(e.tax)} = <b style="white-space:nowrap">결제 ${won(pay + e.tax)}원</b><br><span class="sub">관부가세 ${dutyWhy(e)}</span></div>`;
 }
 function bcNums(){ const b = S.bc, z = sizeOf(b.size); const p = b.mode === "instant" ? z.normal : (b.valid ? b.price : null);
   if (!p) return null; const fee = buyFee(p), ship = F.ship.normal; return {p, fee, ship, total: p + fee + ship}; }
@@ -1183,8 +1181,7 @@ function dmMore(k, route){
 function sumNote(c){
   let t = "";
   if (c.mode !== "bid" && !c.item95) t += `<div class="same nw" data-req="08 · F-06">${c.dm === "storage" ? `창고보관이라 배송비 ${won(F.ship[c.route])}원이 빠졌어요` : "구매하기에서 본 총액과 같아요"}</div>`;
-  if (c.route === "overseas"){ const e = dutyEst(c.price), pay = c.price + buyFee(c.price) + (c.dm === "storage" ? 0 : F.ship[c.route]);
-    t += `<div class="same nw" data-req="08 · F-07">관부가세 예상 ${won(e.tax)}원 (${dutyWhy(e)}) · 결제 금액에 없음</div><div class="same nw" data-req="08 · F-06" style="color:#222;font-weight:800">예상 총 부담 ${won(pay + e.tax)}원</div>`; }
+  if (c.route === "overseas"){ const e = dutyEst(c.price), pay = c.price + buyFee(c.price) + (c.dm === "storage" ? 0 : F.ship[c.route]); }
   return t;
 }
 /* 16 · F-10·11 판매 */
@@ -1414,10 +1411,11 @@ SCREENS.buyConfirm = () => {
 function coCalc(){
   const c = S.co, ship = c.dm==="storage" ? 0 : F.ship[c.dm];
   const fee = buyFee(c.price);
-  return {ship, fee, total: c.price + fee + ship};
+  const tax = c.route === "overseas" ? dutyEst(c.price).tax : 0;  // 08 · F-07 해외배송은 관부가세까지 결제에 포함 (10/22 제안)
+  return {ship, fee, tax, total: c.price + fee + ship + tax};
 }
 SCREENS.checkout = () => {
-  const c = S.co, {ship, fee, total} = coCalc(), U = DATA.user;
+  const c = S.co, {ship, fee, tax, total} = coCalc(), U = DATA.user;
   const routeLabel = {fast:"빠른배송", normal:"일반배송", overseas:"해외배송"}[c.route];
   const t1 = tomorrow();
   const dms = c.route==="overseas"
@@ -1458,7 +1456,7 @@ SCREENS.checkout = () => {
       <div class="line"><span class="k">포인트</span><span class="v">-</span></div>
       <div class="line"><span class="k">검수비</span><span class="v">무료</span></div>
       <div class="line"><span class="k">수수료</span><span class="v">${won(fee)}원</span></div>
-      <div class="line"><span class="k">배송비</span><span class="v">${ship===0?(c.dm==="storage"?"무료":"무료"):won(ship)+"원"}</span></div>
+      <div class="line"><span class="k">배송비</span><span class="v">${ship===0?(c.dm==="storage"?"무료":"무료"):won(ship)+"원"}</span></div>${c.route==="overseas"?`<div class="line nw" data-req="08 · F-07"><span class="k">관부가세</span><span class="v">${won(tax)}원</span></div>`:""}
       <div class="sum"><span class="t">총 결제금액</span><span class="v red">${won(total)}원</span></div>${sumNote(c)}</div></div>
   </div>
   <div class="cfoot">
@@ -1601,12 +1599,12 @@ SHEETS.buySheet = () => {
     if (z.fast || z.p95){
       const lo = minNN(z.fast, z.p95), tl = z.p95 ? "~" : "";
       rows.push(row("fast", `빠른배송 ${bolt}`, `내일 ${md(t1)} 도착 예정`, `${won(lo)}원${tl}`, tot(lo, "fast", tl)));
-      if (r === "fast") rows.push(`${z.fast ? `<button class="opt ${sub === "new" ? "on" : ""}" data-a="buySub" data-v="new"><span class="ot">내일 ${md(t1)} 도착 예정</span><span class="pr">${won(z.fast)}원</span></button>` : ""}${z.p95 ? `<button class="opt opt95 ${sub === "95" ? "on" : ""}" data-a="buySub" data-v="95"><span class="ot">내일 ${md(t1)} 도착 예정</span><span><span class="badge95">95점</span> <span class="pr">${won(z.p95)}원~</span></span><span class="d95 nw" data-req="04 · F-04"><b>95점</b>은 미착용이지만 검수에서 하자가 확인된 상품이에요. 가격은 판매자가 정해서 비싸다고 상태가 더 좋은 건 아니에요. <u data-a="open95" data-s="${z.s}">하자 사진 보기</u> ›</span></button>` : ""}`);
+      if (r === "fast") rows.push(`${z.fast ? `<button class="opt ${sub === "new" ? "on" : ""}" data-a="buySub" data-v="new"><span class="ot">내일 ${md(t1)} 도착 예정</span><span class="pr">${won(z.fast)}원</span></button>` : ""}${z.p95 ? `<button class="opt opt95 ${sub === "95" ? "on" : ""}" data-a="buySub" data-v="95"><span class="ot">내일 ${md(t1)} 도착 예정</span><span><span class="badge95">95점</span> <span class="pr">${won(z.p95)}원~</span></span><span class="d95 nw" data-req="04 · F-04"><b>95점</b>은 미착용이지만 검수에서 하자가 확인된 상품이에요.<br>가격은 판매자가 정해서 비싸다고 상태가 더 좋은 건 아니에요.</span></button>` : ""}`);
     }
     rows.push(row("normal", "일반배송", "5-7영업일", z.normal ? won(z.normal) + "원" : "구매입찰", tot(z.normal, "normal")));
     if (r === "normal") rows.push(`<button class="opt on" data-a="buyRoute" data-r="normal"><span class="ot">5-7영업일 내 도착 예정</span><span class="pr">${z.normal ? won(z.normal) + "원" : "구매입찰"}</span></button>`);
     if (z.overseas){
-      rows.push(row("overseas", "해외배송", "6-10영업일 · 관부가세 별도", won(z.overseas) + "원", `<span class="tot2 nw" data-req="08 · F-06·07">예상 총 ${won(totOf(z.overseas, "overseas") + dutyEst(z.overseas).tax)}원</span>`));
+      rows.push(row("overseas", "해외배송", "6-10영업일 · 관부가세 별도", won(z.overseas) + "원", `<span class="tot2 nw" data-req="08 · F-06·07">총 ${won(totOf(z.overseas, "overseas") + dutyEst(z.overseas).tax)}원</span>`));
       if (r === "overseas") rows.push(`<button class="opt on" data-a="buyRoute" data-r="overseas"><span class="ot">6-10영업일 내 도착 예정<small>사업자 상품</small></span><span class="rtw"><span class="pr">${won(z.overseas)}원</span><small>관부가세 별도</small></span></button>`);
     }
     const is95 = r === "fast" && sub === "95", main = r === "normal" ? (z.normal ? "즉시 구매 / 구매 입찰" : "구매 입찰") : "즉시 구매하기";
@@ -1750,7 +1748,7 @@ A.buyGo = () => {
   const {size, route} = S.buy, z = sizeOf(size);
   log(`구매 진행: ${size} ${route}`);
   if (route==="normal"){ S.bc = {size, mode: z.normal ? "instant" : "bid", price:null, valid:false, warn:false, exp: DATA.bidDefault}; push("buyConfirm"); return; }
-  S.co = {size, route, mode:"instant", price: route==="fast" ? z.fast : z.overseas, dm: route, pay:null, customs:false, memo:null};
+  S.co = {size, route, mode:"instant", price: route==="fast" ? z.fast : z.overseas, dm: route, pay:null, customs:true, memo:null};
   push("checkout");
 };
 A.bcMode = d => { const b = S.bc; if (d.m==="instant" && sizeOf(b.size).normal==null) return; b.mode = d.m; if (d.m==="instant"){ b.price=null; b.warn=false; b.valid=false; } log(`구매 탭: ${d.m==="instant"?"즉시 구매":"구매 입찰"}`); render(); };
@@ -1765,7 +1763,7 @@ A.bcGo = () => {
 A.coDm = d => { S.co.dm = d.k; log(`배송 방법: ${d.k==="storage"?"창고보관":d.k}`); render(); };
 A.coPay = d => { S.co.pay = d.k; if (d.k==="normal" && !S.co.payd) S.co.payd = "신용카드"; log(`결제 방법: ${d.k}`); render(); };
 A.coPayD = d => { S.co.payd = d.k; render(); };
-A.addCustoms = () => { S.co.customs = true; log("통관부호 추가"); toast("통관부호가 등록되었습니다."); render(); };
+A.addCustoms = () => { if (S.co.customs){ toast("통관부호 변경은 테스트 범위 밖이에요"); return; } S.co.customs = true; log("통관부호 추가"); toast("통관부호가 등록되었습니다."); render(); };
 A.openMemo = () => openSheet("memo");
 A.pickMemo = d => { S.co.memo = d.m==="요청사항 없음" ? null : d.m; log(`요청사항: ${d.m}`); closeSheet(); };
 A.coGo = () => { const {total} = coCalc(); log(`★ ${S.co.mode==="bid"?"구매 입찰하기":"결제하기"} 누름 · ${S.co.size} · ${S.co.dm} · ${won(total)}원`); openSheet("done", {title: "결제 직전까지 진행했어요"}); };
