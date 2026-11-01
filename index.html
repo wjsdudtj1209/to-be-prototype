@@ -1151,9 +1151,9 @@ function brkHtml(z, r){
   if (!p) return "";
   const fee = buyFee(p), ship = F.ship[r];
   const pay = p + fee + ship;
-  if (r !== "overseas") return `<div class="brk nw" data-req="08 · F-06">${won(p)} + 수수료 ${won(fee)} + 배송비 ${won(ship)} = <b style="white-space:nowrap">결제 ${won(pay)}원</b> <span class="sub">(확정)</span></div>`;
+  if (r !== "overseas") return `<div class="brk nw" data-req="08 · F-06">${won(p)} + 수수료 ${won(fee)} + 배송비 ${won(ship)} = <b style="white-space:nowrap">예상 결제 ${won(pay)}원</b></div>`;
   const e = dutyEst(p);
-  return `<div class="brk nw" data-req="08 · F-06·07">${won(p)} + 수수료 ${won(fee)} + 배송비 ${won(ship)} + 관부가세 ${won(e.tax)} = <b style="white-space:nowrap">결제 ${won(pay + e.tax)}원</b><br><span class="sub">관부가세 ${dutyWhy(e)}</span></div>`;
+  return `<div class="brk nw" data-req="08 · F-06·07">${won(p)} + 수수료 ${won(fee)} + 배송비 ${won(ship)} + 관부가세 ${won(e.tax)} = <b style="white-space:nowrap">예상 결제 ${won(pay + e.tax)}원</b><br><span class="sub">관부가세 ${dutyWhy(e)}</span></div>`;
 }
 function bcNums(){ const b = S.bc, z = sizeOf(b.size); const p = b.mode === "instant" ? z.normal : (b.valid ? b.price : null);
   if (!p) return null; const fee = buyFee(p), ship = F.ship.normal; return {p, fee, ship, total: p + fee + ship}; }
@@ -1402,7 +1402,7 @@ SCREENS.buyConfirm = () => {
     <button class="cpol" data-a="info" data-k="cancel">취소 및 반품 안내 ${I.chev}</button>
   </div>
   <div class="cfoot">
-    <div class="tot"><span class="t">총 결제금액</span><span class="v nw" data-req="08 · F-06" id="bcTot">${(n=>n?won(n.total)+"원":"-")(bcNums())}</span></div>
+    <div class="tot"><span class="t">예상 결제금액</span><span class="v nw" data-req="08 · F-06" id="bcTot">${(n=>n?won(n.total)+"원":"-")(bcNums())}</span></div>
     <button class="btn red" id="bcGo" data-a="bcGo" ${(!inst && !b.valid)?"disabled":""}>${inst?"즉시 구매 계속":"구매 입찰 계속"}</button>
   </div></div>`;
 };
@@ -1457,7 +1457,7 @@ SCREENS.checkout = () => {
       <div class="line"><span class="k">검수비</span><span class="v">무료</span></div>
       <div class="line"><span class="k">수수료</span><span class="v">${won(fee)}원</span></div>
       <div class="line"><span class="k">배송비</span><span class="v">${ship===0?(c.dm==="storage"?"무료":"무료"):won(ship)+"원"}</span></div>${c.route==="overseas"?`<div class="line nw" data-req="08 · F-07"><span class="k">관부가세</span><span class="v">${won(tax)}원</span></div>`:""}
-      <div class="sum"><span class="t">총 결제금액</span><span class="v red">${won(total)}원</span></div>${sumNote(c)}</div></div>
+      <div class="sum"><span class="t">예상 결제금액</span><span class="v red">${won(total)}원</span></div>${sumNote(c)}</div></div>
   </div>
   <div class="cfoot">
     <div class="hint">간편 충전결제 시 <b>${won(Math.floor(total*0.01/10)*10)}P</b> 추가 적립돼요</div>
@@ -1539,7 +1539,7 @@ SCREENS.sellConfirm = () => {
     ${inst?"":`<div class="dl dl2"><h3>입찰 마감기한</h3><button class="dlrow" data-a="openExp"><span>${c.exp}일 (${ymd(addDays(c.exp))} 마감)</span><span class="dd">${I.down}</span></button></div>`}
   </div>
   <div class="cfoot cfoot2">
-    <div class="tot"><span class="t">정산금액</span><span class="v green" id="scPay">${n.payout!=null?won(n.payout)+"원":"-원"}</span></div>
+    <div class="tot"><span class="t">예상 정산금액</span><span class="v green" id="scPay">${n.payout!=null?won(n.payout)+"원":"-원"}</span></div>
     <button class="btn dark" id="scGo" data-a="scGo" ${(!inst && !c.valid)?"disabled":""}>${inst?"즉시 판매 계속":"판매 입찰 계속"}</button>
   </div></div>`;
 };
@@ -1573,11 +1573,11 @@ SCREENS.sellOrder = () => {
       <div class="line"><span class="k">수수료 (${(F.sellRate*100).toFixed(1)}%)</span><span class="v">-${won(fee)}원</span></div>
       <div class="line"><span class="k">배송비</span><span class="v">선불 ・ 판매자 부담</span></div>
       ${inst?"":`<div class="line"><span class="k">입찰 마감기한</span><span class="v">${o.exp}일 - ${ymd(addDays(o.exp),true)}까지</span></div>`}
-      <div class="sum"><span class="t">정산금액</span><span class="v green">${won(payout)}원</span></div></div></div>
+      <div class="sum"><span class="t">예상 정산금액</span><span class="v green">${won(payout)}원</span></div></div></div>
     <div style="height:24px"></div>
   </div>
   <div class="cfoot">
-    <div class="tot"><span class="t">정산금액</span><span class="v green">${won(payout)}원</span></div>
+    <div class="tot"><span class="t">예상 정산금액</span><span class="v green">${won(payout)}원</span></div>
     <button class="btn ${all?"green":""}" data-a="soGo" ${all?"":"disabled"}>${inst?"즉시 판매하기":"판매 입찰하기"}</button>
   </div></div>`;
 };
@@ -1595,7 +1595,7 @@ SHEETS.buySheet = () => {
     const row = (k, nm, ds, pr, tt) => r === k
       ? `<button class="rt on" data-a="buyRoute" data-r="${k}"><span class="radio on"></span><span class="nm">${nm}</span></button>`
       : `<button class="rt" data-a="buyRoute" data-r="${k}"><span class="radio"></span><span class="nm">${nm}</span><span class="ds">${ds}</span><span class="rtw"><span class="pr">${pr}</span>${tt}</span></button>`;
-    const tot = (p, k, tl = "") => p ? `<span class="tot2 nw" data-req="08 · F-06">총 ${won(totOf(p, k))}원${tl}</span>` : "";
+    const tot = (p, k, tl = "") => p ? `<span class="tot2 nw" data-req="08 · F-06">예상 총 ${won(totOf(p, k))}원${tl}</span>` : "";
     if (z.fast || z.p95){
       const lo = minNN(z.fast, z.p95), tl = z.p95 ? "~" : "";
       rows.push(row("fast", `빠른배송 ${bolt}`, `내일 ${md(t1)} 도착 예정`, `${won(lo)}원${tl}`, tot(lo, "fast", tl)));
@@ -1604,7 +1604,7 @@ SHEETS.buySheet = () => {
     rows.push(row("normal", "일반배송", "5-7영업일", z.normal ? won(z.normal) + "원" : "구매입찰", tot(z.normal, "normal")));
     if (r === "normal") rows.push(`<button class="opt on" data-a="buyRoute" data-r="normal"><span class="ot">5-7영업일 내 도착 예정</span><span class="pr">${z.normal ? won(z.normal) + "원" : "구매입찰"}</span></button>`);
     if (z.overseas){
-      rows.push(row("overseas", "해외배송", "6-10영업일 · 관부가세 별도", won(z.overseas) + "원", `<span class="tot2 nw" data-req="08 · F-06·07">총 ${won(totOf(z.overseas, "overseas") + dutyEst(z.overseas).tax)}원</span>`));
+      rows.push(row("overseas", "해외배송", "6-10영업일 · 관부가세 별도", won(z.overseas) + "원", `<span class="tot2 nw" data-req="08 · F-06·07">예상 총 ${won(totOf(z.overseas, "overseas") + dutyEst(z.overseas).tax)}원</span>`));
       if (r === "overseas") rows.push(`<button class="opt on" data-a="buyRoute" data-r="overseas"><span class="ot">6-10영업일 내 도착 예정<small>사업자 상품</small></span><span class="rtw"><span class="pr">${won(z.overseas)}원</span><small>관부가세 별도</small></span></button>`);
     }
     const is95 = r === "fast" && sub === "95", main = r === "normal" ? (z.normal ? "즉시 구매 / 구매 입찰" : "구매 입찰") : "즉시 구매하기";
@@ -1626,7 +1626,7 @@ SHEETS.sellSheet = () => {
   const s = S.sell, z = s.size ? sizeOf(s.size) : null;
   const grid = DATA.sizes.map(x => `<button class="sz ${s.size===x.s?"on":""}" data-a="sellSize" data-s="${x.s}">${x.s===DATA.mySize?'<span class="mysz nw" data-req="19 · 제안">MY</span>':""}<b>${SL(x.s)}</b>${KRl(x.s)}${x.bid?`<span class="p green">${won(x.bid)}</span>`:`<span class="p none">판매입찰</span>`}</button>`).join("");
   const panel = z && !s.pc ? `<div class="panel"><div class="handle" data-a="panelDown" style="margin-bottom:4px;cursor:pointer" title="사이즈 다시 고르기"></div>
-      ${z.bid?`<div class="brk nw" data-req="16 · F-10">즉시 판매가 ${won(z.bid)} − 수수료 ${won(sellFee(z.bid))} = <b>받을 금액 ${won(z.bid-sellFee(z.bid))}원</b></div>`:""}
+      ${z.bid?`<div class="brk nw" data-req="16 · F-10">즉시 판매가 ${won(z.bid)} − 수수료 ${won(sellFee(z.bid))} = <b>예상 받을 금액 ${won(z.bid-sellFee(z.bid))}원</b></div>`:""}
       <div class="btns sbtns"><button class="btn dark" data-a="toast" data-m="보관 신청은 테스트 범위 밖이에요"><span class="l1"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 2.4l8.6 4.7v9.8L12 21.6l-8.6-4.7V7.1z" fill="#fff"/><path d="M3.7 7.2L12 11.8l8.3-4.6M12 11.8v9.6" stroke="#222" stroke-width="1.3" fill="none" stroke-linejoin="round"/><path d="M16.9 11.6l-3 4.3h2l-1 3.6 3.2-4.6h-2l.8-3.3z" fill="#41b979"/></svg>보관 신청</span><span class="l2">선불 발송</span></button><button class="btn green" data-a="sellGo"><span class="l1">${z.bid?won(z.bid-sellFee(z.bid))+"원":"판매 입찰"}</span><span class="l2">선불 발송</span></button></div></div>` : "";
   return `<div class="sheet" style="height:92%">
     <div class="handle"></div>
