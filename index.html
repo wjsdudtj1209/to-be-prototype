@@ -1195,7 +1195,7 @@ function brkHtml(z, r){
   const pay = p + fee + ship;
   if (r !== "overseas") return `<div class="brk nw" data-req="08 · F-06">${won(p)} + 수수료 ${won(fee)} + 배송비 ${won(ship)}<br><b style="white-space:nowrap">= 결제예정금액 ${won(pay)}원</b></div>`;
   const e = dutyEst(p);
-  return `<div class="brk nw" data-req="08 · F-06·07">${won(p)} + 수수료 ${won(fee)} + 배송비 ${won(ship)} + 관부가세 ${won(e.tax)}<br><b style="white-space:nowrap">= 결제예정금액 ${won(pay + e.tax)}원</b><br><span class="sub">관부가세 ${dutyWhy(e)}</span></div>`;
+  return `<div class="brk nw" data-req="08 · F-06·07">${won(p)} + 수수료 ${won(fee)} + 배송비 ${won(ship)} + 관부가세 ${won(e.tax)}<br><b style="white-space:nowrap">= 결제예정금액 ${won(pay + e.tax)}원</b></div>`;
 }
 function bcNums(){ const b = S.bc, z = sizeOf(b.size); const p = b.mode === "instant" ? z.normal : (b.valid ? b.price : null);
   if (!p) return null; const fee = buyFee(p), ship = F.ship.normal; return {p, fee, ship, total: p + fee + ship}; }
