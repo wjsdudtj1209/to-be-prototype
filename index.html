@@ -105,8 +105,8 @@ input{font:inherit;color:inherit}
 .exh div{flex:none;width:160px;border-radius:12px;background:var(--gray);padding:14px;font-size:13px;font-weight:600;line-height:1.4;height:96px}
 .exh div small{display:block;font-weight:400;color:var(--sub);margin-top:6px}
 .c95{display:flex;gap:14px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}.c95::-webkit-scrollbar{display:none}
-.c95 button{flex:none;width:104px;text-align:left}
-.c95 .im{position:relative;width:104px;height:100px;background:#fff;display:flex;align-items:center;justify-content:center}
+.c95 button{flex:none;width:100px;text-align:left}
+.c95 .im{position:relative;width:100px;height:100px;background:#fff;display:flex;align-items:center;justify-content:center}
 .c95 .im svg{width:88px}
 .badge95{display:inline-flex;align-items:center;justify-content:center;border:1px solid #d4d4d4;border-radius:10px;padding:0 6px;height:18px;font-size:11px;font-weight:700;background:#fff}
 .c95 .im .badge95{position:absolute;left:6px;top:6px}
@@ -739,6 +739,20 @@ body.photo .prow .im,body.photo .oi .im{background:#f4f4f4}
 .lk2 .pr{font-size:13px;font-weight:700;margin-top:3px;white-space:nowrap}
 .lk2 .pr .pct{color:var(--red);font-weight:600;margin-right:4px}
 .lk2 .mt{font-size:11px;color:var(--sub);margin-top:3px}
+/* 11/7 R59 시트 머리 = 앱 판매하기 시트 캡처 */
+.sheet>.handle{width:60px;height:4px;background:#c5c5c5;margin-top:6px}
+.sh-t{font-size:17px;padding:10px 64px 4px}
+.sh-t small{font-size:11px;margin-top:0}
+.sh-t:not(:has(small)){min-height:52px}
+.sh-t .sh-x{right:16px;top:5px;width:44px;height:44px;border-radius:22px;background:#fff;border:1px solid #ececec;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.sh-t .sh-x svg{width:22px;height:22px}
+.sheet .prow{padding:17px 16px 13px;gap:12px}
+.sheet .prow .im{width:56px;height:44px;border-radius:0;background:transparent}
+body.photo .sheet .prow .im{background:transparent}
+.sheet .prow .im img.pho{width:46px}
+.sheet .prow .en{font-size:13px;margin-top:3px}
+.sheet .prow .md{margin-top:3px}
+.sheet .sh-body>.grid:first-child{padding-top:17px}
 /* 11/6 R52 즉시 판매하기 · 판매 입찰하기 = 원래 앱 캡처 비율 */
 .scf .hd{height:44px;padding:0 16px}
 .scf .hd .t{font-size:17px}
@@ -964,11 +978,11 @@ const ORDERS = (() => {
   return {asks, bids};
 })();
 const ITEMS95 = (() => {
-  const r = rng(DATA.seed+3), out = [];
+  const r = rng(DATA.seed+3), out = [], T95 = DATA.mySize || 270;  // 11/7 R60: 테스트 사이즈만 모두 비싸게, 나머지는 섞음
   DATA.sizes.forEach(z => { if (!z.p95) return;
     const k = 3 + Math.floor(r()*3), jb = Math.floor(r()*DATA.defects.length);  // TO-BE: 비교할 수 있게 사이즈마다 3~5개, 하자도 서로 다르게 · 11/5 R49: 가격은 빠른배송 새 상품보다 4~18% 높게(판매자 희망가)
     for (let i=0;i<k;i++){ const j = (jb + i) % DATA.defects.length;
-      out.push({id:`${z.s}-${i}`, s:z.s, price:Math.max(Math.round((z.fast ?? z.normal ?? z.p95) * ([1.04, 1.07, 1.10, 1.14, 1.18][i] + (r() - 0.5) * 0.02) / 1000) * 1000, (z.bid ?? 0) + 2000), defect:DATA.defects[j], dsize:DATA.defectSizes[j]}); }
+      out.push({id:`${z.s}-${i}`, s:z.s, price:Math.max(Math.round((z.fast ?? z.normal ?? z.p95) * ((z.s === T95 ? [1.04, 1.07, 1.10, 1.14, 1.18] : [0.92, 1.08, 0.97, 1.16, 1.03])[i] + (r() - 0.5) * 0.02) / 1000) * 1000, (z.bid ?? 0) + 2000), defect:DATA.defects[j], dsize:DATA.defectSizes[j]}); }
   });
   DATA.sizes.forEach(z => { const ps = out.filter(x => x.s === z.s).map(x => x.price); if (ps.length) z.p95 = Math.min(...ps); });  // 95점 최저가 = 실제 95점 상품 중 최저
   return out;
@@ -1190,9 +1204,9 @@ function rangeBar(price, st){
 function priceTrio(opt){
   const all = opt === "all", lb = lowestBuy(opt), hb = highestBid(opt), last = tradesOf(opt)[0];
   const lbS = all && lb != null ? sizeAt("buy", lb) : null, hbS = all && hb != null ? sizeAt("bid", hb) : null;
-  const cell = (k, v, d, sz) => `<div><div class="k">${k}</div><div class="v">${v != null ? won(v) + "원" : "-"}</div><div class="d">${d}${sz ? ` · ${SL(sz)}` : ""}</div></div>`;
+  const cell = (k, v, d, sz) => `<div><div class="k">${k}</div><div class="v">${v != null ? won(v) + "원" : "-"}</div>${sz ? `<div class="d">${SL(sz)}</div>` : ""}</div>`;
   const note = "";  // 10/21: 설명 상자 대신 즉시 판매가 옆 ⓘ (원래 앱 화면 유지)
-  return `<div class="nw" data-req="22 · F-02"><div class="p3">${cell("즉시 구매가", lb, "국내 일반 상품 · 수수료·배송비 전", lbS)}${cell("즉시 판매가", hb, "바로 팔 때 · 수수료 전", hbS)}${cell("최근 거래가", last ? last.price : null, "실제로 거래된 가격", all && last ? last.s : null)}</div><div class="p3m"><button class="p3l" data-a="info" data-k="prices">가격 설명${I.info}</button></div>${note}</div>`;
+  return `<div class="nw" data-req="22 · F-02"><div class="p3">${cell("즉시 구매가", lb, "", lbS)}${cell("즉시 판매가", hb, "", hbS)}${cell("최근 거래가", last ? last.price : null, "", all && last ? last.s : null)}</div><div class="p3m"><button class="p3l" data-a="info" data-k="prices">가격 설명${I.info}</button></div>${note}</div>`;
 }
 function avgBlock(opt, where){
   const st = stats(opt, S.basis), now = lowestBuy(opt);
@@ -1494,8 +1508,7 @@ SCREENS.product = () => {
     <div class="thumbs">${DATA.img ? DATA.img.thumbs.map((t,i)=>`<div class="${i?"":"on"}"><img decoding="async" class="pho" src="${t}" alt=""></div>`).join("") : [0,1,2,3].map(()=>`<div>${shoe()}</div>`).join("")}</div>
     <div class="pinfo">
       ${P.retail ? `<div class="retail">발매가 ${won(P.retail)}원</div>` : ""}
-      ${(h => `<div class="price">${!h.sel && pct>0?`<span class="pct">${pct}%</span>`:""}${h.p != null ? won(h.p) + "원" : "구매 입찰"}</div>
-      <div class="cap nw" data-req="22 · F-01">${h.sel && h.p == null ? `${SL(h.s)} · 판매 입찰이 없어 구매 입찰만 가능해요` : `즉시 구매가 · ${h.sel ? `${SL(h.s)}${h.s === DATA.mySize ? " (내 사이즈)" : ""}` : `${SL(h.s)} 사이즈가 가장 낮아요`} · 수수료·배송비 전`}</div>`)(headPrice())}
+      ${(h => `<div class="price">${!h.sel && pct>0?`<span class="pct">${pct}%</span>`:""}${h.p != null ? won(h.p) + "원" : "구매 입찰"}</div>`)(headPrice())}
       <div class="nm">${esc(P.ko)}</div><div class="en">${esc(P.en)}</div>
       <div class="rate">★ <b>${P.rating}</b> <span class="u sub">리뷰 ${P.reviews}</span></div>
       <div class="ranks">${(P.ranks || [P.rank, "지금 인기", "스니커즈"]).map(t => `<span class="u">${t}</span>`).join(" · ")}</div>
@@ -1542,7 +1555,7 @@ SCREENS.product = () => {
     <div class="sec">
       <h3>95점 동일 상품 <button data-a="info" data-k="about95" aria-label="95점 안내">${I.q}</button></h3>
       ${DEF95}
-      <div class="c95">${c95.map(x=>`<button data-a="open95" data-s="${x.s}" data-id="${x.id}"><div class="im">${shoe()}</div><div class="r1"><span class="b95">95</span>${SL(x.s)}</div><div class="pr">${won(x.price)}원${bolt}</div><div class="st nw" data-req="04 · F-05">상태 · ${x.defect.split(" · ")[0]}</div>${new95(x.s) != null ? `<div class="df nw" data-req="04 · F-05">즉시 구매가 ${won(new95(x.s))}원</div>` : ""}</button>`).join("")}</div>
+      <div class="c95">${c95.map(x=>`<button data-a="open95" data-s="${x.s}" data-id="${x.id}"><div class="im">${shoe()}</div><div class="r1"><span class="b95">95</span>${SL(x.s)}</div><div class="pr">${won(x.price)}원${bolt}</div><div class="st nw" data-req="04 · F-05">상태 · ${x.defect.split(" · ")[0]}</div></button>`).join("")}</div>
       <button class="more" data-a="open95" data-s="${c95s || ""}">95점 동일 상품 더보기</button>
     </div>
     <div class="sec brd">
@@ -1737,7 +1750,7 @@ SCREENS.sellConfirm = () => {
       <div class="pwarn" id="scWarn">${c.warn?"2만원 부터 천원단위로 입력하세요.":""}</div>
       <div class="bind">
         <div class="line"><span class="k">검수비</span><span class="v" id="scIns">${n.price?"무료":"-"}</span></div>
-        <div class="line"><span class="k"><span id="scFeeK">수수료</span> <button class="qb" data-a="feeTip" aria-label="수수료 안내"><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="rgba(34,34,34,.4)" stroke-width="1.4"><circle cx="10" cy="10" r="8.3"/><path d="M7.7 7.9a2.3 2.3 0 1 1 3.4 2c-.7.4-1.1.8-1.1 1.6v.5" stroke-linecap="round"/><circle cx="10" cy="14.2" r=".45" fill="rgba(34,34,34,.4)"/></svg></button></span><span class="v" id="scFee">${n.fee!=null?"-"+won(n.fee)+"원":"-"}</span></div>
+        <div class="line"><span class="k"><span id="scFeeK">수수료</span></span><span class="v" id="scFee">${n.fee!=null?"-"+won(n.fee)+"원":"-"}</span></div>
         <div class="fwhy nw" data-req="16 · F-10">기본 2,500원 + 판매가의 6.0%(등급) · VAT 별도</div>
         <div class="line"><span class="k">배송비</span><span class="v">선불 ・ 판매자 부담</span></div>
       </div>
