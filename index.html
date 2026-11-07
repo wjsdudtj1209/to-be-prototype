@@ -784,6 +784,12 @@ body.photo .sheet .prow .im{background:transparent}
 .scf .cfoot2 .tot .t{font-size:13px;font-weight:400}
 .scf .cfoot2 .tot .v{font-size:16px}
 .scf .cfoot2 .btn{height:44px;padding:0 24px;border-radius:10px;font-size:15px}
+/* 11/7 R63 리뷰 핏 막대 = 버튼 */
+button.fitg{width:100%;text-align:left}
+.fitg .k{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+/* 11/7 R65 희망가 칸 선택 = 앱처럼 회색 */
+#askIn,#bidIn{caret-color:#222}
+#askIn::selection,#bidIn::selection{background:#d5d5d5;color:#222}
 .sheet.full{top:calc(var(--sat, 0px) + 10px)}
 /* 공유판: 컴퓨터에서는 iPhone 17 틀을 쓰고 창에 맞춰 줄인다.
    휴대폰 폭(500px 이하)에서는 틀 없이 화면 전체를 앱처럼 쓴다 (10/19: 폰으로 사용성 테스트) */
@@ -1228,11 +1234,11 @@ function marketBlock(opt, where){
   return priceTrio(opt) + avgBlock(opt, where) + (where === "product" ? ex95Html() : "");
 }
 /* 22 · F-01·02 상단 사이즈 카드 — 사이즈 선택 버튼 + 세 가격의 뜻. 고른 사이즈는 시세 · 구매/판매 버튼과 같이 바뀜 */
-const szLabel = opt => opt === "all" ? "사이즈 선택" : (+opt === DATA.mySize ? `내 사이즈 ${SL(opt)}${KRs(opt)}` : `${SL(opt)}${KRs(opt)}`);
+const szLabel = opt => opt === "all" ? "사이즈 선택" : (+opt === DATA.mySize ? `내 사이즈 ${SL(opt)}` : `${SL(opt)}`);
 const szBtn = (opt, sm) => `<button class="szb${sm ? " sm" : ""}" data-a="openOpt" data-t="product">${sm ? (opt === "all" ? "사이즈 선택" : `${SL(opt)}${KRs(opt)}`) : szLabel(opt)}<span class="dn">${I.down}</span></button>`;
 /* 19 · F-12·13 (팀 스토리보드 'A 사이즈 판단 카드'): 환산 + 리뷰 핏을 두 줄로 */
-function szBrief(s){ const c = CONV.find(r => r[0] === s), f = (DATA.fitPct || [])[0];
-  return `<span class="nw" data-req="19 · F-12·13">${SL(s) !== s ? ((t => t ? `UK ${t[2]} · US ${t[3]}` : "")((DATA.sizeTable || []).find(x => x[1] === +s))) : c ? `US ${c[1]} · JP ${c[4]}` : ""}${f ? `<br>리뷰 ${f[1]} <b>${f[2]}%</b>` : ""}</span>`; }
+function szBrief(s){ const f = (DATA.fitPct || [])[0];
+  return `<span class="nw" data-req="19 · F-12·13">${hasKR(s) ? `KR ${s}` : ""}${hasKR(s) && f ? " · " : ""}${f ? `리뷰 정사이즈 <b>${f[2]}%</b>` : ""}</span>`; }
 function sizeCard(opt){
   const all = opt === "all";
   return `<div class="szc"><div class="szc-h">${szBtn(opt)}<span class="sub">${all ? "사이즈를 고르면 그 사이즈 가격으로 바뀌어요" : szBrief(+opt)}</span></div>
@@ -1294,7 +1300,7 @@ function chart2(opt, basis){
   return `<div class="nw" data-req="22 · F-03"><svg class="chart" viewBox="0 0 360 ${H}">${grid}${marks}${avgL}</svg><div class="cap" style="margin:-8px 0 12px">${cap} · 점선 = ${basisLabel(basis, st)} 평균</div></div>`;
 }
 /* 04 · F-04·05 95점 */
-const DEF95 = `<div class="def95 nw" data-req="04 · F-04">정품이지만 검수에서 하자가 확인된 상품이에요.<br>가격은 판매자가 정해서 비싸다고 상태가 더 좋은 건 아니에요.</div>`;
+const DEF95 = `<div class="def95 nw" data-req="04 · F-04">95점은 검수에서 하자가 확인된 미착용 상품이에요.<br>비싸다고 상태가 더 좋은 건 아니에요.</div>`;
 function cmp95Html(p){  // 04 · F-05 같은 사이즈 새 상품과 95점을 한 줄에서 비교
   if (!p.size) return "";
   const nb = new95(p.size), list = ITEMS95.filter(x => x.s === +p.size); if (!list.length) return "";
@@ -1318,7 +1324,7 @@ function convOf(s){ if (DATA.sizeTable){ const t = DATA.sizeTable.find(x => x[1]
 function szInfoHtml(z){
   // 11/6 R50: 내 사이즈 · 환산 · 리뷰 핏 글 대신 리뷰 핏 막대 하나(사용자 시안). 값은 상세 일반 리뷰 '사이즈' 요약과 같음
   const d = DATA.fitDist; if (!d) return "";
-  return `<div class="fitg nw" data-req="19 · F-12·13"><span class="k">리뷰 핏</span><div class="bw"><div class="bar"><i style="flex:${d[0]}"></i><b style="flex:${d[1]}"></b><i style="flex:${d[2]}"></i></div><div class="lb"><span>작게 ${d[0]}%</span><b>정사이즈 ${d[1]}%</b><span>크게 ${d[2]}%</span></div></div></div>`;
+  return `<button class="fitg nw" data-req="19 · F-13" data-a="fitGo" aria-label="리뷰 핏 · 일반 리뷰로 이동"><span class="k">리뷰 핏</span><div class="bw"><div class="bar"><i style="flex:${d[0]}"></i><b style="flex:${d[1]}"></b><i style="flex:${d[2]}"></i></div><div class="lb"><span>작게 ${d[0]}%</span><b>정사이즈 ${d[1]}%</b><span>크게 ${d[2]}%</span></div></div></button>`;
 }
 /* 08 · F-06·07 총액 */
 function brkHtml(z, r){
@@ -1818,7 +1824,7 @@ SHEETS.buySheet = () => {
     if (z.fast || z.p95){
       const lo = minNN(z.fast, z.p95), tl = z.p95 ? "~" : "";
       rows.push(row("fast", `빠른배송 ${bolt}`, `내일 ${md(t1)} 도착 예정`, `${won(lo)}원${tl}`, tot(lo, "fast", tl)));
-      if (r === "fast") rows.push(`${z.fast ? `<button class="opt ${sub === "new" ? "on" : ""}" data-a="buySub" data-v="new"><span class="ot">내일 ${md(t1)} 도착 예정</span><span class="pr">${won(z.fast)}원</span></button>` : ""}${z.p95 ? `<button class="opt opt95 ${sub === "95" ? "on" : ""}" data-a="buySub" data-v="95"><span class="ot">내일 ${md(t1)} 도착 예정</span><span><span class="badge95">95점</span> <span class="pr">${won(z.p95)}원~</span></span><span class="d95 nw" data-req="04 · F-04"><b>95점</b>은 미착용이지만 검수에서 하자가 확인된 상품이에요.<br>가격은 판매자가 정해서 비싸다고 상태가 더 좋은 건 아니에요.</span></button>` : ""}`);
+      if (r === "fast") rows.push(`${z.fast ? `<button class="opt ${sub === "new" ? "on" : ""}" data-a="buySub" data-v="new"><span class="ot">내일 ${md(t1)} 도착 예정</span><span class="pr">${won(z.fast)}원</span></button>` : ""}${z.p95 ? `<button class="opt opt95 ${sub === "95" ? "on" : ""}" data-a="buySub" data-v="95"><span class="ot">내일 ${md(t1)} 도착 예정</span><span><span class="badge95">95점</span> <span class="pr">${won(z.p95)}원~</span></span><span class="d95 nw" data-req="04 · F-04"><b>95점</b>은 검수에서 하자가 확인된 미착용 상품이에요.<br>비싸다고 상태가 더 좋은 건 아니에요.</span></button>` : ""}`);
     }
     rows.push(row("normal", "일반배송", "5-7영업일", z.normal ? won(z.normal) + "원" : "구매입찰", tot(z.normal, "normal")));
     if (r === "normal") rows.push(`<button class="opt on" data-a="buyRoute" data-r="normal"><span class="ot">5-7영업일 내 도착 예정</span><span class="pr">${z.normal ? won(z.normal) + "원" : "구매입찰"}</span></button>`);
@@ -1956,6 +1962,13 @@ A.tab = d => { const to = d.k === "MY" ? "my" : (d.k === "HOME" || d.k === "SHOP
   if (!to){ toast("하단 탭은 테스트 범위 밖이에요"); return; } if (cur().name === to && S.stack.length === 1) return;
   S.stack = [{name: to}]; S.sheets = []; S.nav = null; log(`탭 → ${LABEL[to]}`); render(); };
 A.closeSheet = () => closeSheet();
+/* 11/7 R63 리뷰 핏 막대 → 시트를 닫고 상세 '일반 리뷰'로 이동 */
+A.fitGo = () => { log("리뷰 핏 → 일반 리뷰"); closeSheet();
+  setTimeout(() => { const b = [...document.querySelectorAll('[data-sc="body-product"]')].pop(), t = b && b.querySelector(".rv2"); if (!t) return;
+    const k = b.getBoundingClientRect().height / b.offsetHeight || 1;
+    const y = b.scrollTop + (t.getBoundingClientRect().top - b.getBoundingClientRect().top) / k - 48;
+    const ty = Math.max(0, Math.min(y, b.scrollHeight - b.clientHeight)); S.ptabLock = "review"; S.ptabLockY = ty;
+    b.scrollTo({top: ty, behavior: REDUCE() ? "auto" : "smooth"}); ptabSync(b); }, REDUCE() ? 0 : 300); };
 A.info = d => openSheet("info", {k:d.k});
 A.shipInfo = d => openSheet("shipInfo", {k:d.k});
 const SHIP_INFO = {
@@ -1978,7 +1991,8 @@ const SHIP_INFO = {
 SHEETS.shipInfo = sh => `<div class="sheet full shi"><div class="shi-h"><span>배송정보</span><button class="ic pl-circ" data-a="closeSheet" aria-label="닫기">${I.x}</button></div><div class="sh-body" data-sc="sh-shipInfo"><div class="shib">${SHIP_INFO[sh.k] || ""}</div></div></div>`;
 A.ptab = d => { const b = [...document.querySelectorAll('[data-sc="body-product"]')].pop(); if (!b) return;
   const t = d.k === "product" ? null : b.querySelector(`[data-sec="${d.k}"]`);
-  const y = t ? b.scrollTop + t.getBoundingClientRect().top - b.getBoundingClientRect().top - 48 : 0;
+  const k = b.getBoundingClientRect().height / b.offsetHeight || 1;  // 11/7 R64 폰 틀 축소 보정
+  const y = t ? b.scrollTop + (t.getBoundingClientRect().top - b.getBoundingClientRect().top) / k - 48 : 0;
   const ty = Math.max(0, Math.min(y, b.scrollHeight - b.clientHeight)); S.ptabLock = d.k; S.ptabLockY = ty;
   b.scrollTo({top: ty, behavior: REDUCE() ? "auto" : "smooth"}); ptabSync(b); log(`상세 탭: ${d.k}`); };
 function ptabSync(b){
@@ -2021,7 +2035,15 @@ A.buyGo = () => {
   S.co = {size, route, mode:"instant", price: route==="fast" ? z.fast : z.overseas, dm: route, pay:null, customs:true, memo:null};
   push("checkout");
 };
-A.bcMode = d => { const b = S.bc; if (d.m==="instant" && sizeOf(b.size).normal==null) return; b.mode = d.m; if (d.m==="instant"){ b.price=null; b.warn=false; b.valid=false; } log(`구매 탭: ${d.m==="instant"?"즉시 구매":"구매 입찰"}`); render(); };
+/* 11/7 R63 입찰 ↔ 즉시 탭을 오가도 넣은 희망가를 기억했다가 되살림 */
+function keepBid(st, was, now){
+  if (now === "instant"){ if (was === "bid" && st.price) st.keep = {price: st.price, valid: st.valid, warn: st.warn}; st.price = null; st.valid = false; st.warn = false; }
+  else if (was === "instant" && st.keep){ Object.assign(st, st.keep); st.keep = null; }
+}
+/* 희망가 칸: 포커스 + 숫자 전체 선택 → 지우지 않고 바로 덮어쓰기 */
+function selAll(el){ try { el.setSelectionRange(0, el.value.length); } catch(_) { el.select(); } }
+function selPrice(id){ const el = [...document.querySelectorAll("#" + id)].pop(); if (!el) return; el.focus({preventScroll: true}); selAll(el); }
+A.bcMode = d => { const b = S.bc; if (d.m==="instant" && sizeOf(b.size).normal==null) return; const was = b.mode; b.mode = d.m; keepBid(b, was, d.m); log(`구매 탭: ${d.m==="instant"?"즉시 구매":"구매 입찰"}`); render(); if (d.m==="bid" && was==="instant" && b.price) selPrice("bidIn"); };
 A.bcExp = d => { S.bc.exp = +d.d; log(`입찰 마감기한: ${d.d}일`); render(); };
 A.bcGo = () => {
   const b = S.bc, z = sizeOf(b.size);
@@ -2048,7 +2070,7 @@ A.sellSize = d => { S.sell.pc = false; S.sell.size = +d.s; S.prodOpt = String(+d
 A.sellGo = () => { S.sck = {size:S.sell.size, c:SELL_CHECKS.map(()=>true)}; A.sckGo(); };  // TO-BE(10/17): '판매 전 확인' 단계 없이 바로 판매 방식으로
 A.sckToggle = (d, el, e) => { if (e.target.closest(".lk")) return; S.sck.c[+d.i] = !S.sck.c[+d.i]; log(`판매 전 확인 ${+d.i+1}: ${S.sck.c[+d.i]?"체크":"해제"}`); render(); };
 A.sckGo = () => { const z = sizeOf(S.sck.size); S.sc = {size:S.sck.size, mode: z.bid ? "instant" : "bid", price:null, valid:false, warn:false, exp:DATA.bidDefault}; push("sellConfirm"); };
-A.scMode = d => { const c = S.sc; if (d.m==="instant" && sizeOf(c.size).bid==null) return; c.mode = d.m; if (d.m==="instant"){ c.price=null; c.valid=false; c.warn=false; } log(`판매 탭: ${d.m==="instant"?"즉시 판매":"판매 입찰"}`); render(); };
+A.scMode = d => { const c = S.sc; if (d.m==="instant" && sizeOf(c.size).bid==null) return; const was = c.mode; c.mode = d.m; keepBid(c, was, d.m); log(`판매 탭: ${d.m==="instant"?"즉시 판매":"판매 입찰"}`); render(); if (d.m==="bid" && was==="instant" && c.price) selPrice("askIn"); };
 A.openExp = () => openSheet("expPick");
 A.scExpPick = d => { S.sc.exp = +d.d; log(`입찰 마감기한: ${d.d}일`); closeSheet(); };
 SHEETS.expPick = () => `<div class="sheet"><div class="handle"></div><div class="sh-t">입찰 마감기한</div><div class="sh-body" data-sc="sh-expPick"><div class="grid" style="padding:12px 0 8px">${DATA.bidDays.map(d => `<button class="sz ${S.sc.exp === d ? "on" : ""}" data-a="scExpPick" data-d="${d}"><b>${d}일</b></button>`).join("")}</div></div></div>`;
@@ -2094,11 +2116,14 @@ document.addEventListener("focusout", e => {
   if (n < DATA.minBid){ st.price=n; st.valid=false; st.warn=true; log(`${who} 입력: ${won(n)} (최소 미만)`); syncPrice(kind); return; }
   n = Math.floor(n/1000)*1000;
   const toInstant = kind==="bc" ? (z.normal!=null && n >= z.normal) : (z.bid!=null && n <= z.bid);
-  if (toInstant){ st.mode="instant"; st.price=null; st.valid=false; st.warn=false;
+  if (toInstant){ st.mode="instant"; st.keep = {price: n, valid: true, warn: false}; st.price=null; st.valid=false; st.warn=false;
     log(`${who} ${won(n)} 입력 → ${kind==="bc"?"즉시 구매":"즉시 판매"}로 자동 전환`); render(); return; }
   st.price=n; st.valid=true; st.warn=false; el.value = won(n); log(`${who} 입력: ${won(n)}원`); syncPrice(kind);
 });
 document.addEventListener("keydown", e => { if (e.key==="Enter" && e.target.dataset && e.target.dataset.in) e.target.blur(); });
+let SELNEXT = null;  // 11/7 R63 희망가 칸을 누르면 숫자 전체 선택
+document.addEventListener("focusin", e => { const el = e.target; if (!el.dataset || !el.dataset.in || !el.value) return; SELNEXT = el; selAll(el); setTimeout(() => { if (document.activeElement === el) selAll(el); }, 0); });
+document.addEventListener("mouseup", e => { if (SELNEXT && e.target === SELNEXT) e.preventDefault(); SELNEXT = null; }, true);
 
 /* TO-BE(10/17): 바텀시트를 아래로 끌어서 닫기 (터치 · 마우스). 내용이 맨 위일 때만 끌리고, 아니면 평소처럼 스크롤 */
 let DRAG = null, NOCLICK = 0;
