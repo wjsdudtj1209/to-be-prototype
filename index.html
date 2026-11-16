@@ -791,6 +791,9 @@ button.fitg{width:100%;text-align:left}
 #askIn,#bidIn{caret-color:#222}
 #askIn::selection,#bidIn::selection{background:#d5d5d5;color:#222}
 .sz b{white-space:nowrap;letter-spacing:-.4px}
+.hist-top{flex:none;position:relative;z-index:2;background:#fff;padding:0 16px}
+.hist-top .optsel{margin-bottom:12px}
+.hist-top.sh{box-shadow:0 2px 4px rgba(0,0,0,.06)}
 .sheet.full{top:calc(var(--sat, 0px) + 10px)}
 /* 공유판: 컴퓨터에서는 iPhone 17 틀을 쓰고 창에 맞춰 줄인다.
    휴대폰 폭(500px 이하)에서는 틀 없이 화면 전체를 앱처럼 쓴다 (10/19: 폰으로 사용성 테스트) */
@@ -1898,9 +1901,11 @@ SHEETS.history = () => {
   const lb = lowestBuy(h.opt), hb = highestBid(h.opt);
   return `<div class="sheet full">
     <div class="dr-hd">거래 및 입찰 내역<button class="ic" data-a="closeSheet">${I.x}</button></div>
-    <div class="dr-body" data-sc="sh-history" id="histBody">
+    <div class="hist-top">
       ${prow().replace('class="prow"','class="prow" style="padding:4px 0 12px"')}
       <button class="optsel" data-a="openOpt" data-t="history"><span>${h.opt==="all"?"모든 옵션":SL(h.opt) + KRs(h.opt)}</span><span class="dn">${I.down}</span></button>
+    </div>
+    <div class="dr-body" data-sc="sh-history" id="histBody">
       ${marketBlock(h.opt, "history")}
       <div class="rs"><b>최근 시세</b>${periodChange(h.opt, S.basis)}<button class="al" data-a="toast" data-m="가격 알림은 앱에서 받을 수 있어요">+ 가격 알림 받기</button></div>
       <div class="bmode nw" data-req="22 · F-02·03"><span class="cap" style="margin:0">시세 기준</span><div class="seg sm">${[["d","기간"],["n","건수"]].map(([k,l])=>`<button class="${(S.basis[0]==="n")===(k==="n")?"on":""}" data-a="bMode" data-k="${k}">${l}</button>`).join("")}</div></div>
@@ -2010,6 +2015,8 @@ function ptabSync(b){
   bar.classList.toggle("on", on); bar.querySelectorAll("button").forEach(x => x.classList.toggle("on", x.dataset.k === k));
 }
 document.addEventListener("scroll", e => { const b = e.target; if (b && b.dataset && b.dataset.sc === "body-product") ptabSync(b); }, true);
+// R68: 거래 및 입찰 내역을 스크롤하면 고정된 상품 정보 · 옵션 칸 아래에 옅은 그림자
+document.addEventListener("scroll", e => { const b = e.target; if (b && b.id === "histBody" && b.previousElementSibling) b.previousElementSibling.classList.toggle("sh", b.scrollTop > 2); }, true);
 A.prodTab = d => { S.prodTab = d.k; log(`시세 탭: ${d.k}`); render(); };
 A.openOpt = d => openSheet("optPicker", {t:d.t});
 A.pickOpt = d => { if (d.t==="product") S.prodOpt = d.s; else { S.hist.opt = d.s; S.hist.limit = 50; } log(`옵션 선택: ${d.s==="all"?"모든 옵션":d.s}`); closeSheet(); };
